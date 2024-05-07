@@ -1,0 +1,325 @@
+\documentclass[12pt]{article}
+
+\usepackage[french,ngerman,english]{babel}
+\usepackage[longnamesfirst]{natbib}% nonamebreak
+\usepackage{multibib}
+
+% Use utf-8 encoding for foreign characters
+\usepackage[utf8]{inputenc}
+
+% Setup for fullpage use
+\usepackage{fullpage}
+
+% additional packages
+\usepackage{setspace}
+\usepackage{subfigure}
+\usepackage{authblk}
+\usepackage{pdflscape}
+\usepackage{multirow}
+\usepackage[colorlinks=true,linkcolor=somecolor,citecolor=somecolor]{hyperref}
+\usepackage{enumerate}
+
+
+\title{Econ 210C Part 2: Monetary Economics}
+\author{Johannes Wieland, UCSD, Spring 2024}
+\date{}
+
+\begin{document}
+
+\maketitle
+\singlespacing
+
+\section*{Logistics}
+
+\subsection*{Instructor:}
+Johannes Wieland
+\begin{itemize}
+	\item \href{jfwieland@ucsd.edu}{jfwieland@ucsd.edu}
+%	\item Econ 309 (maybe)
+	\item OH: Thu 10-11am, SDSC 197E.
+\end{itemize}
+
+%\subsection*{TA:}
+%Mitch Vanvuren
+%\begin{itemize}
+%	\item mvanvure@ucsd.edu
+%	\item Section: Tue 2-3pm. 
+%	\item OH: Mon 12-1pm. 
+%\end{itemize}
+
+\subsection*{Lectures:}
+
+\begin{itemize}
+	\item Tue, Thu 11am-12:20pm, WLH 2114
+\end{itemize}
+
+%\subsection*{Discussion Board:}
+%
+%\begin{itemize}
+%	\item For the benefit of everyone in this class, please ask your question on the Piazza discussion board.
+%	\item Sign-up link: \href{piazza.com/ucsd/spring2021/econ210c}{piazza.com/ucsd/spring2021/econ210c}
+%\end{itemize}
+
+
+
+\subsection*{Overview:}
+
+The course focuses on Monetary Economics. We derive the Classical Dichotomy in a classical monetary model and learn what tools (and how) the central bank can use to control inflation. After discuss the evidence for monetary non-neutrality from various empirical approaches, we first develop a simple model consistent with these data and then the New Keynesian model. Time-permitting, we also discuss other approaches that deliver monetary non-neutrality. The course then turns to the optimal conduct of monetary policy in normal times and (time-permitting) in the liquidity trap.
+
+% and particularly the New Keynesian Model. The course begins with a brief overview of the Real Business Cycle framework. After considering the evidence for monetary non-neutrality, the course develops the basic building blocks of the New Keynesian framework by adding money, imperfect competition, and nominal rigidity to the RBC model. The course then turns to the conduct of monetary policy. After discussing the liquidity trap and policy in a liquidity trap, we will turn to recent topics in macroeconomics.
+
+\subsection*{Textbooks and Course Materials:}
+
+\begin{itemize}
+	\item Lecture slides and required readings will be posted on the course website.
+	\item Textbook:
+	\begin{itemize}
+		\item Gali, Jordi. \emph{Monetary Policy, Inflation, and the Business Cycle: An Introduction to the New Keynesian Framework and Its Applications}, 2nd Edition. Princeton University Press: Princeton, NJ.
+	\end{itemize}
+	\item Other Suggested Macroeconomics Textbooks:
+	\begin{itemize}
+		\item Romer, David. \emph{Advanced Macroeconomics}, 5th Edition, McGraw-Hill.
+		\item Woodford, Michael. \emph{Interest and Prices: Foundations of a Theory of Monetary Policy.} Princeton University Press: Princeton NJ.
+	\end{itemize}
+\end{itemize}
+
+
+\section*{Requirements:}
+
+\begin{itemize}
+	\item {\bf These are my best estimates for how I will conduct the assessment for this class. While I will do what I can to keep to the predicted assessments for this course, the evolving situation may make it necessary for me to make a change.}
+	\item 10 Lectures From May 7 to June 6.
+	\item Grading For This Half of Course: 60\% take-home final, 40\% problem sets.
+	\item Problem sets:
+	\begin{itemize}
+		\item You are encouraged to work in groups up to four people.
+		\item  If you do so you must indicate who you worked with on your write up.
+		\item  Each student must submit upload their work to a Github repository by the deadline.
+		\item Give us read access to your repository so we can access the files.
+		\begin{itemize}
+			\item I recommend not making this your standard repository OR to revoke access at the end of the quarter.
+		\end{itemize}
+		\item Grading: Check+, Check, Check-, 0.
+		\begin{itemize}
+			\item If you make an effort to answer every question you will get a check, which is considered full credit.
+			\item Check+ (=$1.25\times$ full credit) goes to the best attempt. If multiple attempts are equally strong on paper, then whichever answer executes code the fastest will get a Check+. Note that we may (and likely will) publish the best answer as a template for everyone else.
+		\end{itemize}
+		\item You can discuss questions with other students outside your group, but you should not share solutions.
+%		\item Sharing answers across groups is not allowed and will be considered an academic integrity violation. The penalty will be a zero score on the problem set for everyone in the providing group and in the receiving group.
+%		\begin{itemize}
+%			\item It is OK to discuss
+%		\end{itemize}
+	\end{itemize}
+	\item Final:
+	\begin{itemize}
+		\item Take home exam, 8 hours.
+		\item Assignment will be available starting June, 11 at 8am.
+		\item Will be a combination of data analysis, model computation, and write-up.
+		\item Open book: you can use lecture slides, textbook, internet, ChatGPT and other ``AI''-methods.
+		\item But you are not allowed to discuss the final with any other student.
+	\end{itemize}
+%	\item Final format to be confirmed, but will likely be written exam (downloadable from Canvas).
+%	\begin{itemize}
+%		\item No communication between students is allowed at any time during the midterm or final. Violating this rule will be considered an academic integrity violation and result in an $F$ grade for the class.
+%		\item I will likely ask you to remain connected and visible through zoom during exam time to enforce academic integrity.
+%		\item Closed book and no communication is allowed.
+%	\end{itemize}
+%	\item Final project:
+%	\begin{itemize}
+%		\item Your chance to develop and work on research ideas.
+%		\item The most difficult task in PhD program, so good to start early!
+%		\item Main requirement: Must be related to the course.
+%	\end{itemize}
+%	\item Initial proposal:
+%	\begin{itemize}
+%		\item One-page summary:
+%		\begin{itemize}
+%			\item What is the question?
+%			\item Why is it interesting?
+%			\item How do you propose to answer it?
+%		\end{itemize}
+%		\item Due April 30 (Canvas).
+%		\item Will give feedback following week.
+%	\end{itemize}
+%	\item Final submission:
+%	\begin{itemize}
+%		\item Should be around 5 pages.
+%		\item Due June 8 (Canvas).
+%	\end{itemize}
+%	\item Graded on:
+%	\begin{itemize}
+%		\item 25\% Quality of initial proposal.
+%		\item 75\% Quality of final project.
+%	\end{itemize}
+	\item You are encouraged to stop me if you are confused and ask questions. I want this to be a discussion rather than a lecture as frequently as possible!
+	\item You may not use electronic devices such as laptops, tablets, or phones in class. If you feel like you need an electronic device to learn or have another good reason to use electronic devices in class, please come see me.
+	\item I want the course to be fun.
+	\begin{itemize}
+		\item I will try to reference interesting recent research.
+		\item The focus will be on theory, but I will also discuss related empirics.
+		\item Please ask questions and be engaged. Even if you do not become a macroeconomist, you will be asked about monetary policy for the rest of your life. Now is the time to learn something about it.
+	\end{itemize}
+\end{itemize}
+
+\section*{Reading List}
+
+Required readings are starred. Readings may be changed over the course of the quarter. This reading list is extensive because it is not only be a list of required readings but also
+a guide to the literature should you become interested in the topics we cover.
+
+\begin{itemize}
+%	\item Business Cycle Facts
+%	\begin{itemize}
+%		\item* Rebelo, Sergio T. and Robert G. King (1999). ``Resuscitating Real Business Cycles.'' In Handbook of Macroeconomics: 927-1007.
+%		\item Stock, James and Mark Watson (1999). ``Business Cycle Fluctuations in U.S. Macroeconomic Time Series.'' In Handbook of Macroeconomics: 3-64.
+%	\end{itemize}
+%	\item Real Business Cycle Model: Review, Criticisms, and Business Cycle Accounting
+%	\begin{itemize}
+%		\item* Rebelo, Sergio and Robert G. King (1999). ``Resuscitating Real Business Cycles.'' in Handbook of Macroeconomics'': 927-1007.
+%		\item* Prescott, Edward (1986). ``Theory Ahead of Business Cycle Measurement.'' MN FRB QR. 10(4): 9-22.
+%		\item* Summers, Lawrence (1986). ``Some Skeptical Observations on Real Business Cycle Theory.'' MN FRB QR. 10(4): 23-27.
+%		\item* Prescott, Edward (1986). ``Response to a Skeptic.'' MN FRB QR. 10(4): 28-33.
+%		\item Chetty, Raj, Adam Guren, Day Manoli, and Andrea Weber (2013). ``Does Indivisible Labor Explain the Difference Between Micro and Macro Elasticities? A Meta-Analysis of Extensive Margin Elasticities.'' NBER Macro Annual 2012: 1-56.
+%		\item Gali, Jordi (1999). ``Technology, Employment, and the Business Cycle: Do Technology Shocks Explain Aggregate Fluctuations?'' AER 89(1): 249-271.
+%		\item Basu, Susanto, John Fernald, and Miles Kimball. (2006). ``Are Technology Improvements Contractionary?'' AER 96(5): 1418-1448.
+%		\item Rotemberg, Julio and Michael Woodford. (1996). ``Real-Business-Cycle Models and the Forecastable Movements in Output, Hours, and Consumption.'' AER 86(1): 71-89.
+%		\item Gali, Jordi, Mark Gertler, and David Lopez-Salido (2007). ``Markups, Gaps, and the Welfare Costs of Business Cycle Fluctuations.'' ReStat 89(1) 44-59.
+%		\item Chari, V.V., Patrick Kehoe, and Ellen McGrattan (2007). ``Business Cycle Accounting.'' Emca 75(3): 781-836.
+%		\item Shimer, Robert (2009). ``Convergence in Macroeconomics: The Labor Wedge.'' AEJ: Macro 1(1): 280-297.
+%		\item Bils, Mark, Peter Klenow, and Benjamin Malin (2018). ``Resurrecting the Role of the Product Market Wedge in Recessions.'' AER 108(4-5): 1118-1146.
+%	\end{itemize}
+%	\item Empirical Motivation for Nominal Rigidity
+%	\begin{itemize}
+%		\item* Stock, James and Mark Watson (2001). ``Vector Autoregressions.'' JEP 15(4):101-115.
+%		\item Econometrics Reference: Enders, Walter (2014). ``Applied Econometric Time Series.'' Wiley.
+%		\item Christiano, Lawrence, Martin Eichenbaum, and Charles Evans (2005). ``Nominal Rigidities and the Dynamic Effects of a Shock to Monetary Policy.'' JPE 113(1): 1-45.
+%		\item Romer and Romer (2004). ``A New Measure of Monetary Shocks: Derivation and Implications.'' AER 94(4): 1055-1084.
+%		\item Nakamura and Steinsson (2018). ``Identification in Macroeconomics.'' JEP 32(3): 59-68.
+%		\item Velde, Francois (2009). ``Chronicle of a Deflation Unforetold.'' JPE. 117(4): 591- 634.
+%	\end{itemize}
+	\item The Classical Dichotomy
+	\begin{itemize}
+		\item* Gali Chapter 2.
+	\end{itemize}
+	\item Solving Models in Sequence Space
+	\begin{itemize}
+		\item* \href{https://www.antonbabkin.com/econ714/log-lin_sims.pdf}{Anton Babkin log-linearization guide}
+		\item* \href{https://github.com/shade-econ/sequence-jacobian/blob/master/notebooks/rbc.ipynb}{Shade Econ Github Repository}
+		\item Boppart, Timo, Per Krusell, and Kurt Mitman, ``Exploiting MIT Shocks in Heterogeneous-Agent Economies: The Impulse Response as a Numerical Derivative,'' JEDC, April 2018, 89, 68-92.
+		\item Adrien Auclert, Bence Bard{\'o}czy, Matthew Rognlie, and Ludwig Straub. 2021. ``Using the Sequence-Space Jacobian to Solve and Estimate Heterogeneous-Agent Models'', ECMTA 89 (5) 2021: 2375-2408.
+	\end{itemize}
+	\item Controlling Inflation
+	\begin{itemize}
+		\item* Castillo-Martinez, Laura and Ricardo Reis (2019) ``How do central banks control inflation? A guide for the perplexed.'' WP
+		\item Cochrane, John (2011). ``Determinacy and Identification With Taylor Rules.'' JPE 119(3): 565-615.
+		\item Angeletos, George-Marios and Chen Lian (2021) ``Determinacy without the Taylor Principle'', WP.
+		\item Gali Chapter 2.
+	\end{itemize}
+	\item Empirical Motivation for Nominal Rigidity: VAR approach
+	\begin{itemize}
+		\item* Stock, James and Mark Watson (2001). ``Vector Autoregressions.'' JEP 15(4):101-115.
+		\item Econometrics Reference: Enders, Walter (2014). ``Applied Econometric Time Series.'' Wiley.
+		\item Christiano, Lawrence, Martin Eichenbaum, and Charles Evans (2005). ``Nominal Rigidities and the Dynamic Effects of a Shock to Monetary Policy.'' JPE 113(1): 1-45.
+	\end{itemize}
+	\item Empirical Motivation for Nominal Rigidity: Other approaches
+	\begin{itemize}
+		\item* Nakamura and Steinsson (2018). ``Identification in Macroeconomics.'' JEP 32(3): 59-68.
+		\item Hausman, Joshua K., Paul Rhode, and Johannes F. Wieland (2019). ``Recovery from the Great Depression: The Farm Channel in Spring 1933.'' AER, 109(2):427-72,
+		\item Romer and Romer (2004). ``A New Measure of Monetary Shocks: Derivation and Implications.'' AER 94(4): 1055-1084.
+		\item Velde, Francois (2009). ``Chronicle of a Deflation Unforetold.'' JPE. 117(4): 591- 634.
+	\end{itemize}
+	\item A Simple Model of Nominal Rigidity
+	\begin{itemize}
+		\item* Nakamura and Steinsson (2013). ``Price Rigidity: Microeconomic Evidence and Macroeconomic Implications.'' ARE 5:133-63.
+		\item Basu, Susanto, John Fernald, and Miles Kimball. (2006). ``Are Technology Improvements Contractionary?'' AER 96(5): 1418-1448.
+	\end{itemize}
+	\item The New Keynesian Model
+	\begin{itemize}
+		\item* Gali Chapter 3.
+		\item Blanchard, Olivier, and Nobuhiro Kiyotaki (1987). ``Monopolistic Competition and the Effects of Aggregate Demand.'' AER 77(4): 647-666
+		\item Gali, Jordi and Mark Gertler (2007). ``Macroeconomic Models for Monetary Policy Evaluation.'' JEP 21(4): 24-45.
+		\item Ball, Laurence (1994). ``Credible Disinflation With Staggered Price Setting.'' AER 84(1): 282-289.
+		\item Goodfriend, Marvin, and Robert King (2005). ``The Incredible Volcker Disinflation.'' JME 52: 981-1015.
+		\item Fuhrer, Jeff (2011). ``Inflation Persistence.'' In Handbook of Monetary Economics: 423-486.
+		\item Mankiw, N. Gregory, and Ricardo Reis (2002). ``Sticky Information Versus Sticky Prices: A Proposal To Replace the New Keynesian Phillips Curve.'' QJE 117(4):1295-1328.
+%		\item Christiano, Lawrence, Martin Eichenbaum, and Charles Evans (2005). ``Nominal Rigidities and the Dynamic Effects of a Shock to Monetary Policy.'' JPE 113(1): 1-45.
+		\item Smets, Frank and Rafael Wouters (2007). ``Shocks and Frictions in U.S. Business Cycle Models.'' AER 97(3): 586-606.
+		\item Chari, V.V., Patrick Kehoe, and Ellen McGrattan (2009). ``New Keynesian Mod- els: Not Yet Useful for Policy Analysis.'' AEJ: Macro 1(1): 242-266.
+%		\item Sbordone, Argia (2002). ``Prices and Unit Labor Costs: A New Test of Price Stickiness.'' JME 49: 265-292.
+		\item Gali, Jordi and Mark Gertler (1999). ``Inflation Dynamics: A Structural Econometric Analysis.'' JME 44: 195-222.
+		\item Mavroeidis, Sophocles, Mikkel Plagborg-Moller, and James Stock (2014). ``Empirical Evidence on Inflation Expectations in the New Keynesian Phillips Curve.'' JEL 52(1): 124-188.
+	\end{itemize}
+	\item Optimal Monetary Policy in a New Keynesian Framework
+	\begin{itemize}
+		\item* Gali Chapters 4,5.1-3
+		\item Clarida, Richard, Jordi Gali, and Mark Gertler (1999). ``The Science of Mone-
+tary Policy: A New Keynesian Perspective.'' JEL 37(4): 1661-1707.
+	\end{itemize}
+	\item The Liquidity Trap
+	\begin{itemize}
+		\item* Krugman, Paul (1998): ``It's Baaack: Japan's Slump and the Return of the Liquidity Trap.'' BPEA Vol. 1998, No. 2, pp. 137-205.
+		\item Gali Chapter 5.4.
+		\item Eggertsson, Gauti and Paul Krugman (2012). ``Debt, Deleveraging, and the Liquidity Trap: A Fisher-Minsky-Koo Approach. QJE 127(3): 1469-1513.
+%		\item Guerrieri, Veronica and Guido Lorenzoni (2017). ``Credit Crises, Precautionary
+%Savings, and the Liquidity Trap.'' QJE 132(3): 1427-1467.
+%		\item Midrigan, Virgiliu and Thomas Philippon (2018). ``Household Leverage and the
+%Recession.'' WP.
+		\item Eggertsson, Gauti and Michael Woodford (2003). ``Optimal Monetary and Fiscal
+Policy in a Liquidity Trap.'' BPEA 2003(1): 139-233.
+	 	\item Werning, Ivan (2012). ``Managing a Liquidity Trap: Monetary and Fiscal Policy.'' WP.
+	 	\item Coibion, Olivier, Yuriy Gorodnichenko, Johannes Wieland (2012). ``The Optimal Inflation Rate in New Keynesian Models: Should Central Banks Raise Their Inflation Targets in Light of the Zero Lower Bound?'' RESTUD 79(4): 1371-1406.
+	 	\item McKay, Alisdair, Emi Nakamura, and Jon Steinsson (2016). ``The Power of Forward Guidance Revisited.'' AER 106(10): 3133-3158.
+	 	\item Cochrane, John H (2017), ``The new-Keynesian liquidity trap'', JME 92: 47-63.
+	 	\item Wieland, Johannes (2019), ``Are Negative Supply Shocks Expansionary at the Zero Lower Bound?,'' JPE 127(3): 973-1007.
+	\end{itemize}
+%	\item Policy in a Liquidity Trap
+%	\begin{itemize}
+%		\item* Gali Chapter 5.4.
+%		\item Eggertsson, Gauti and Michael Woodford (2003). ``Optimal Monetary and Fiscal
+%Policy in a Liquidity Trap.'' BPEA 2003(1): 139-233.
+%		\item Werning, Ivan (2012). ``Managing a Liquidity Trap: Monetary and Fiscal Policy.'' WP.
+%		\item Coibion, Olivier, Yuriy Gorodnichenko, Johannes Wieland (2012). ``The Optimal Inflation Rate in New Keynesian Models: Should Central Banks Raise Their Inflation Targets in Light of the Zero Lower Bound?'' RESTUD 79(4): 1371-1406.
+%%		\item Midrigan, Virgiliu and Thomas Philippon (2018). ``Household Leverage and the Recession.'' WP.
+%		\item Simsek, Alp and Anton Korinek (2016). ``Liquidity Trap and Excessive Leverage.'' AER 106(3): 699-738.
+%%		\item Carlstrom, Charles, Timothy Fuerst, and Matthias Paustian (2015). ``Inflation and Output in New Keynesian Models With a Transient Interest Rate Peg.'' JME 76: 230-243.
+%		\item Del Negro, Marco, Marc Giannoni, and Christina Patterson (2015). ``The Forward Guidance Puzzle.'' WP.
+%		\item McKay, Alisdair, Emi Nakamura, and Jon Steinsson (2016). ``The Power of Forward Guidance Revisited.'' AER 106(10): 3133-3158.
+%%		\item Werning, Ivan (2015). ``Incomplete Markets and Aggregate Demand.'' WP.
+%		\item Wieland, Johannes (2019), ``Are Negative Supply Shocks Expansionary at the Zero Lower Bound?,'' JPE 127(3): 973-1007.
+%		\item Cochrane, John H (2017), ``The new-Keynesian liquidity trap'', JME 92: 47-63.
+%	\end{itemize}
+%	\item Evidence for Nominal Rigidity [Time-permitting]
+%	\begin{itemize}
+%		\item * Nakamura and Steinsson (2013) ``Price Rigidity: Microeconomic Evidence and
+%Macroeconomic Implications.'' Annual Review of Economics.
+%		\item Klenow and Malin (2010) ``Microeconomic Evidence on Price Setting.''
+%Handbook of Monetary Economics.
+%		\item Bils and Klenow (2004) ``Some Evidence on the Importance of Sticky Prices.'' JPE.
+%		\item Nakamura and Steinsson (2008) ``Five Facts About Prices: A Reevaluation of Menu Cost Models.'' QJE.
+%	\end{itemize}
+%	\item Intro to (S,s) Models of Pricing [Time-permitting] 
+%	\begin{itemize}
+%		\item * Caplin and Spulber (1987) ``Menu Costs and the Neutrality of Money.'' QJE.
+%		\item Golosov and Lucas (2007) ``Menu Costs and Phillips Curves.'' JPE.
+%		\item Midrigan (2011) ``Menu Costs, Multi-Product Firms, and Aggregate Fluctuations.'' Emca.
+%		\item Alvarez, Le Bihan and Lippi (2016) ``The Real Effects of Monetary Shocks in
+%Sticky Price Models: A Sufficient Statistic Approach.'' AER.
+%	\end{itemize}
+%	\item Real Rigidity [Time-permitting]
+%	\begin{itemize}
+%		\item Cooper and John. 1988. ``Coordinating Coordination Failures in Keynesian Models.'' QJE.
+%\item  Ball and Romer (1990) ``Real Rigidities and the Non-Neutrality of Money.'' RESTUD.
+%\item  Kimball (1995) ``The Quantitative Analytics of the Basic Neomonetarist Model.'' JMCB.
+%\item  Basu (2005). ``Comment on: `Implications of State-Dependent Pricing for Dynamic Macroeconomic Modelling.'''
+%\item Nakamura and Steinsson (2010) ``Monetary Non-Neutrality in a Multi-Sector Menu Cost Model.'' QJE.
+%\item  Chari, Kehoe, and McGrattan (2000) ``Sticky Price Models of the Business Cycle: Can the Contract Multiplier Solve the Persistence Problem?'' Emca.
+%\item Klenow and Willis (2016). ``Real Rigidities and Nominal Price Changes.''
+%Economica.
+%\item Bils, Klenow, and Malin (2012). ``Reset Price Inflation and the Impact of Monetary Policy Shocks.'' AER.
+%\item Gopinath and Istkhoki (2011). ``In Search of Real Rigidities.'' NBER
+%Macroeconomics Annual.
+%	\end{itemize}
+%	\item Intro to Heterogeneous Agent Models [Time-permitting]
+\end{itemize}
+
+
+\end{document}

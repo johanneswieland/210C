@@ -1,0 +1,543 @@
+\documentclass[english,xcolor=svgnames]{beamer}
+
+\input{../../../../Templates/Latex/teachingslidesbeamer.tex}
+
+% ===========================================================
+% ===========================================================
+% ===========================================================
+\begin{document}
+
+\title{Classical Dichotomy \\ Economics 210C}
+\vspace{1cm}
+\author[shortname]{
+\begin{tabular}{c}
+	Johannes Wieland \\ 
+	\footnotesize \href{mailto:jfwieland@ucsd.edu}{jfwieland@ucsd.edu}  \\ 
+\end{tabular}
+}
+
+\date{Spring \the\year}
+
+\setbeamertemplate{footline}{}
+\makebeamertitle
+\setbeamertemplate{footline}[frame number]{}
+
+\addtocounter{framenumber}{-1}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\AtBeginSection[]{
+\setbeamertemplate{footline}{}
+  \frame<beamer>{ 
+
+    \frametitle{Outline}   
+
+    \tableofcontents[currentsection] 
+  }
+\setbeamertemplate{footline}[frame number]{}
+\addtocounter{framenumber}{-1}
+}
+
+\AtBeginSubsection[]{
+\setbeamertemplate{footline}{}
+  \frame<beamer>{ 
+
+    \frametitle{Outline}   
+
+    \tableofcontents[currentsection,currentsubsection] 
+  }
+  \setbeamertemplate{footline}[frame number]{}
+  \addtocounter{framenumber}{-1}
+}
+
+
+
+%\setbeamertemplate{footline}{}
+%\begin{frame}
+%\frametitle{Outline}   
+%\tableofcontents[hideallsubsections] 
+%\end{frame}
+%\addtocounter{framenumber}{-1}
+%\setbeamertemplate{footline}[frame number]{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}
+\frametitle{Introduction}
+\begin{itemize}
+	\item So far all(?) models you have seen in the core are real.
+	\item Today we will add money and prices to a standard business cycle model.
+	\item The key prediction from this model is the Classical Dichotomy: money is neutral, i.e., it does not affect real variables.
+	\item This result will be useful starting point for analyzing the determinants of prices and inflation (next class).
+	\item We will then examine evidence for / against the Classical Dichotomy.
+\end{itemize}
+\end{frame}
+
+
+%\begin{frame}
+%\frametitle{Money}
+%\begin{itemize}
+%	\item Characteristics of money:
+%	\begin{enumerate}
+%		\item Unit of account
+%		\item Medium of exchange
+%		\item Store of value
+%	\end{enumerate}
+%	\item This class will be primarily about (1), touching occasionally on (2) and (3).
+%\end{itemize}
+%\end{frame}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Flexible Price Monetary Model}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Households}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Money Demand: Ideas}
+\begin{itemize}
+	\item Money has no nominal return. If bonds pay interest, why hold money?
+	\begin{itemize}
+		\item Money provides ``liquidity services.''
+		\begin{itemize}
+			\item Costly and time consuming to buy and sell bonds every time you want to buy something.
+			\item You also don't want to seek out someone who wants to trade for exactly what you have.
+		\end{itemize}
+		\item Money provides anonymity. 
+	\end{itemize}
+	\item To focus on interesting questions about how money changes economy, punt on why people hold it and just put real money balances $M_t/P_t$ in the utility function.
+	\begin{itemize}
+		\item Choose convenient isoelastic form.
+		\item Alternative: Cash in advance constraint or New Monetarist day/night markets.
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Setup: Households}
+\begin{itemize}
+	\item Preferences:
+	\begin{align*}
+		\max_{\{C_{t+s},N_{t+s},B_{t+s},M_{t+s}\}} E_t \left\{\sum_{s=0}^{\infty}\beta^s\left(\frac{C_{t+s}^{1-\gamma}}{1-\gamma}+\zeta\frac{(M_{t+s}/P_{t+s})^{1-\nu}}{1-\nu}-\chi \frac{N_{t+s}^{1+\varphi}}{1+\varphi}\right)\right\}
+	\end{align*}
+	\begin{itemize}
+		\item Discount factor $\beta\in(0,1)$, $\rho=-\log \beta$ is the discount rate.
+		\item $\gamma>0$ is CRRA, $\sigma=1/\gamma$ is IES.
+		\item $\nu>0$ determines elasticity of money demand.
+		\item $\varphi>0$ where $1/\varphi$ is the Frisch elasticity of labor supply. 
+	\end{itemize}
+	\item Notes:
+	\begin{itemize}
+		\item All that matters is $U$ being twice continuously differentiable with $U_c>0,\; U_{cc}<0,\;U_m>0,\; U_{mm}<0,\; U_n<0,\; U_{nn}<0$.
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+
+
+
+\begin{frame}
+\frametitle{Setup: Households}
+%\begin{align*}
+%		E_t \left\{\sum_{s=0}^{\infty}\beta^s\left(\frac{C_{t+s}^{1-\gamma}}{1-\gamma}+\zeta\frac{(M_{t+s}/P_{t+s})^{1-\nu}}{1-\nu}-\chi \frac{N_{t+s}^{1+\varphi}}{1+\varphi}\right)\right\}
+%	\end{align*}
+\begin{itemize}
+	\item Budget constraint:
+	\begin{align*}
+		P_tC_t + B_{t}  + M_t  \le W_tN_t +  Q_{t-1}B_{t-1} + M_{t-1} + P_{t}(TR_t+PR_t)
+	\end{align*}
+	\item Real budget constraint:
+	\begin{align*}
+		C_{t}= \frac{W_t}{P_t} N_t -\frac{B_t-Q_{t-1}B_{t-1}}{P_{t}}-\frac{M_t-M_{t-1}}{P_{t}}+TR_t+PR_t
+	\end{align*}
+	\begin{itemize}
+		\item $P_t$ is the price of output $C_t$.
+		\item $B_{t}$ is holdings of a nominal bond bought at price 1 and yielding $Q_{t}$ at time $t+1$.
+		\item $Q_{t}$ is gross nominal interest rate between periods $t$ and $t+1$.
+		\item $W_t$ is the nominal wage. 
+		\item $M_t$ is quantity of money households hold at end of period $t$.
+		\item $TR_t$ are real transfers and $PR_t$ are real rebated profits.
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{A Note on Timing}
+\begin{itemize}
+%	\item Real budget constraint:
+%	\begin{align*}
+%		C_{t}= \frac{W_t}{P_t} N_t -\frac{B_t-Q_{t-1}B_{t-1}}{P_{t}}-\frac{M_t-M_{t-1}}{P_{t}}+TR_t+PR_t
+%	\end{align*}
+	\item Instead of giving a claim to a return on capital determined at time $t+1$, nominal bonds are coupon bonds.
+\begin{itemize}
+	\item Buy at face price of 1 at $t$, know that will pay $Q$ at $t+1$.
+	\item Bond return between $t$ and $t+1$ now determined at time $t$.
+	\item Consequently, gross $t$ to $t+1$ return is denoted as $Q_t$.
+%	\item And bond holdings of bonds bought at $t$ and maturing at $t+1$ are $B_t$ not $B_{t+1}$ with the real bonds in RBC.
+	\end{itemize}
+	\item The (ex-post) real interest rate on the bond is not known at $t$:
+	\begin{align*}
+		R_{t+1}\equiv Q_t \frac{P_t}{P_{t+1}}
+	\end{align*}
+	\begin{itemize}
+	\item Depends on the realization of inflation at $t+1$.
+	\item This timing helps clarify what an ``expectation at time t'' means and is consistent with literature.
+	\end{itemize}
+	\item Note: Different timing from Gali.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Household Problem: Three FOCs
+}
+\begin{itemize}
+	\item Static FOC WRT labor:
+	\begin{align*}
+	\frac{W_t}{P_t}&=\frac{\chi N_t^\varphi}{C_t^{-\gamma}}
+	\end{align*}
+	\item Dynamic FOC WRT $B_t$: Euler equation
+	\begin{align*}
+		1&=\beta E_t\left\{Q_t \frac{P_t}{P_{t+1}} \frac{C_{t+1}^{-\gamma}}{C_{t}^{-\gamma}}\right\}
+	\end{align*}
+	\item Dynamic FOC WRT $M_t$:
+	\begin{align*}
+		1&=\beta E_t\left\{\frac{P_t}{P_{t+1}} \frac{C_{t+1}^{-\gamma}}{C_{t}^{-\gamma}}\right\}+\zeta\frac{(M_t/P_t)^{-\nu}}{C_{t}^{-\gamma}}
+	\end{align*}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Intertemporal Consumption Choice}
+\begin{itemize}
+	\item Solve the Euler equation forward:
+	\begin{align*}
+		C_{t}^{-\gamma} &= E_t\left\{\beta R_{t+1}C_{t+1}^{-\gamma}\right\} \\
+		&= \lim_{T\rightarrow\infty} E_t \prod_{s=0}^{T}(\beta R_{t+1+s}) C_{t+1+T}^{-\gamma}
+	\end{align*}
+	\item Consumption today determined by:
+	\begin{itemize}
+		\item Long-run consumption $C_{t+1+T}$ $\approx$ permanent income.
+		\item Intertemporal substitution through the path of real interest rates.
+	\end{itemize}
+	\item Very different from old Keynesian consumption function, $c_t = k + mpc \times y_t$.
+	\begin{itemize}
+		\item Old Keynesian consumption behavior remerges in Heterogeneous Agent New Keynesian (HANK) models.
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{The Stochastic Discount Factor}
+%\begin{align*}
+%	\beta E_t\left\{Q_t \frac{P_t}{P_{t+1}} \frac{C_{t+1}^{-\gamma}}{C_{t}^{-\gamma}}\right\}=1
+%\end{align*}
+\begin{itemize}
+	\item Call
+	\begin{align*}
+		\Lambda_{t,t+1}\equiv\frac{\beta C_{t+1}^{-\gamma}}{C_{t}^{-\gamma}} \\
+	\end{align*}
+	the household's \emph{stochastic discount factor}.
+	
+		\item Pins down economy's real interest rate as Euler is:
+		\begin{align*}
+		1 = \beta E_t\left\{Q_t \frac{P_t}{P_{t+1}} \frac{C_{t+1}^{-\gamma}}{C_{t}^{-\gamma}}\right\} \equiv E_t\{\Lambda_{t,t+1}R_{t+1}\}
+	\end{align*}
+	\begin{itemize}
+		\item Very important for asset pricing, as with different assets price is determined by covariance between return and SDF.
+		\item Will be implicit discount rate of firms if households own firms as this is how shareholders discount cashflows.
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Bonds Vs. Money
+}
+\begin{itemize}
+	\item The bonds and money FOCs can also be written as:
+\begin{align*}
+	U_{C_t} &= \beta Q_t E_t\left\{ \frac{P_t}{P_{t+1}} U_{C_{t+1}}\right\} \\
+	U_{C_t} &= \beta E_t\left\{ \frac{P_t}{P_{t+1}} U_{C_{t+1}}\right\} + U_{M_t/P_t} 
+\end{align*}
+	\item Euler: MU cost of buying $\epsilon$ more bonds today = discounted price-level and return adjusted benefit of having $\epsilon$ more bonds tomorrow.
+	\item Money: MU cost of holding $\epsilon$ more money today = discounted price-level adjusted benefit of having $\epsilon$ more money tomorrow plus liquidity benefits of holding $\epsilon$ more money overnight.
+	\item Money Demand Trade-Off: Can buy bond and get return or money and get utility benefit
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Money Demand
+}
+\begin{itemize}
+	\item Combining bonds and money FOCs gives money demand:
+	\begin{align*}
+		\frac{M_t}{P_t}=\zeta^{1/\nu}\left(1-\frac{1}{Q_t}\right)^{-1/\nu}C_{t}^{\gamma/\nu}
+	\end{align*}
+\begin{itemize}
+	\item Increasing in $C_t$ : Consume more, demand more money.
+	\item Decreasing in $Q_t$: Decreasing in opportunity cost of holding money, the nominal interest rate.
+	\item Often summarize as reduced-form function:
+	\begin{align*}
+		\frac{M_t}{P_t}=\Phi(C_t,Q_t)
+	\end{align*}
+\end{itemize}
+%	\item Log-linearize
+%	\begin{align*}
+%		\hat{m}_t-\hat{p}_t=\hat{c}_{t}^{\gamma/\nu} - \eta\hat{i}_t 
+%	\end{align*}
+%	where $\eta\approx \frac{1}{\nu(i+1)}$.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Transversality Conditions
+}
+\begin{itemize}
+	\item TVC $B_t$:
+	\begin{align*}
+		\lim_{T\rightarrow\infty} E_t\Lambda_{t,t+T}\frac{B_T}{P_T} = 0
+	\end{align*}
+	\item TVC $M_t$:
+	\begin{align*}
+		\lim_{T\rightarrow\infty} E_t\Lambda_{t,t+T}\frac{M_T}{P_T} = 0
+	\end{align*}
+	\item In words:
+	\begin{itemize}
+		\item Cannot borrow exponentially more and more to repay existing debt and finance consumption (rules out $<0$).
+		\item Sub-optimal to save exponentially more each period (rules out $>0$).
+	\end{itemize}
+\end{itemize}	
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Firms}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Setup: Firms}
+\begin{itemize}
+	\item Firms produce output $Y_t$ CRS with labor $N_t$ (no capital).
+	 \begin{align*}
+			Y_t = A_t N_{t} 
+		\end{align*}
+%	\begin{itemize}
+%		\item $A_t$ is TFP, $a_t=\log A_t$ follows an AR(1) process:
+%		$a_t=\rho_a a_{t-1}+\epsilon^a_t$ with $\rho_a\in[0,1]$ 
+%	\end{itemize}
+	\item Firms maximize profits:
+	\begin{align*}
+		\max_{N_t}PR_t = Y_t - \frac{W_t}{P_t}N_t 
+	\end{align*}
+	\item FOC:
+	\begin{align*}
+		 MPL_t =   A_t   = \frac{W_t}{P_t}
+	\end{align*}
+\end{itemize}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Government}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Setup: Government}
+\begin{itemize}
+	\item The government budget constraint:
+	\begin{align*}
+		B_t + M_t = P_t Tr_t + Q_{t-1}B_{t-1} + M_{t-1}
+	\end{align*}
+	\item In real terms:
+	\begin{align*}
+		\frac{B_t}{P_t} + \frac{M_t}{P_t} =  Tr_t + \frac{Q_{t-1}B_{t-1}}{P_t} + \frac{M_{t-1}}{P_t}
+	\end{align*}
+	\item Government issues bonds or prints money to finance transfers and pay off past debt.
+	\item Taxes are captured as negative transfers.
+%	\item Household TVCs rule out ponzi schemes.
+%\begin{align*}
+%	\frac{B_t}{P_t}  + \sum_{s=0}^{\infty}\frac{Tr_{t+s}}{\prod_{j=0}^s R_{t+1+j}} = \lim_{T\rightarrow\infty}\frac{B_T / P_T}{\prod_{j=0}^T R_{t+1+j}} \underbrace{=}_{TVC} 0
+%\end{align*}
+\end{itemize}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Markets}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Setup: Markets}
+\begin{itemize}
+	\item Four markets
+	\begin{itemize}
+		\item Labor: $N_t^{firms}=N_{t}^{households}$
+		\item Bond: $B_t^{government}=B_{t}^{households}$
+		\item Money: $M_t^{government}=M_t^{households}$
+		\item Output: $Y_t=C_t$.
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Equilibrium}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Equilibrium Definition}
+An equilibrium is an allocation $\{C_{t+s},N_{t+s},Y_{t+s},B_{t+s}\}_{s=0}^{\infty}$, a set of prices $\{W_{t+s},P_{t+s},Q_{t+s}\}_{s=0}^{\infty}$, an exogenous processes $\{A_{t+s},Tr_{t+s},M_{t+s}\}_{s=0}^{\infty}$ and initial conditions for bonds and capital $B_{t-1},K_{t-1}$ such that:
+\begin{enumerate}[1.]
+	\item Households maximize utility subject to budget constraints.
+	\item Firms maximize profits given their technology.
+	\item The government satisfies its budget constraint.
+	\item Markets clear:
+	\begin{enumerate}[3.1.]
+		\item Labor demanded equals labor supplied.
+		\item Bond issuance by the government equals bond holding by households.
+		\item Money issuance by the government equals money holdings by households.
+		\item Output equals consumption plus investment.
+	\end{enumerate}
+\end{enumerate}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Equilibrium Equations}
+\begin{align*}
+	Y_t&=A_tN_{t}  \\
+	\frac{W_t}{P_t}&= A_t  \\
+	\frac{W_t}{P_t}&=\frac{\chi N_t^\varphi}{C_t^{-\gamma}} \\
+	Y_t&=C_t \\
+	\frac{M_t}{P_t}&=\zeta^{1/\nu}\left(1-\frac{1}{Q_t}\right)^{-1/\nu}C_{t}^{\gamma/\nu}\\
+	1&=\beta E_t\left\{Q_t \frac{P_t}{P_{t+1}} \frac{C_{t+1}^{-\gamma}}{C_{t}^{-\gamma}}\right\} 
+\end{align*}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Classical Dichotomy}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Classical Dichotomy: The Real Block
+}
+\begin{itemize}
+	\item Fist four equations in the ``real block'' pin down output, employment, the real wage, and consumption.
+	\begin{align*}
+		\text{Labor Supply: }\frac{W_t}{P_t}&=\frac{\chi N_t^\varphi}{C_t^{-\gamma}}\\
+		\text{Labor Demand: }\frac{W_t}{P_t}&= A_tN_{t} 
+	\end{align*}
+	and $C_t=Y_t=A_tN_t $
+	\item Yields one equation in $N_t$:
+	\begin{align*}
+		\frac{\chi N_t^\varphi}{(A_tN_t )^-\gamma}= A_t \;\Rightarrow\;N_t=\left(\frac{1}{\chi}A_{t}^{1-\gamma}\right)^{\frac{1}{\varphi+\gamma }}
+	\end{align*}
+	\item Monetary Neutrality: Real outcomes are independent of the price level and unaffected by nominal variables.
+%	\begin{itemize}
+%		\item Super Neutrality: Not only does the level of money not matter, but its long-run growth rate also does not matter.
+%	\end{itemize}
+	\item Monetary Neutrality implies the Classical Dichotomy: can analyze real and nominal variables independently.
+\end{itemize}
+\end{frame}
+
+
+
+
+\begin{frame}
+\frametitle{How General Is The Neutrality Result?
+}
+\begin{itemize}
+	\item Look at real block imposing $Y_t=C_t$ :
+	\begin{align*}
+	C_t&=F(N_t;A_t) \\
+	\frac{W_t}{P_t}&=F_N(N_t;A_t) \\
+	\frac{W_t}{P_t}&=\frac{U_{N_t}}{U_{C_t}} 
+\end{align*}
+	\item Money cannot show up in aggregate resource constraint or
+production function.
+	\item From labor supply, see key condition is \emph{separability between
+money and consumption / labor in utility function.}
+	\begin{itemize}
+		\item $M_t/P_t$ does not affect $U_{N_t}$ or $U_{C_t}$ and thus does not affect MRS or labor supply curve.
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Non-Separable Money In Utility
+}
+\begin{itemize}
+	\item We can generate non-neutrality from creating a cross-partial between $M_t/P_t$ and $N_t$ or $C_t$ in the utility function.
+	\begin{itemize}
+		\item See Gali book.
+%		\item Relationship between money supply and price level violates empirical evidence.
+	\end{itemize}
+	\item I find this to be a fairly unsatisfying way to obtain
+non-neutrality.
+	\begin{itemize}
+		\item Money in the utility function is a short cut.
+		\item What does it mean for liquidity services to increase when labor or consumption changes?
+		\item I used to think that the liquidity services effect was unimportant, but recent work has convinced me that it is important in emerging economies.
+		\begin{itemize}
+			\item Chodorow-Reich, Gopinath, Mishra, Narayanan (2019) in India
+			\item Alvarez and Argente (2019) in Mexico
+		\end{itemize}	
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{What About Capital?
+}
+\begin{itemize}
+	\item Assuming away capital is not driving neutrality.
+	\item Non-capital equations and resource constraint:
+	\begin{align*}
+	Y_t&=F(K_{t-1},N_t;A_t) \\
+	\frac{U_{N_t}}{U_{C_t}}&=F_N(K_{t-1},N_t;A_t) \\
+	Y_t&=C_{t}+K_t-(1-\delta)K_{t-1} 
+	\end{align*}
+	\item Household Euler is in terms of real rate, as is firm capital FOC:
+	\begin{align*}
+		1&=E_t\left\{\frac{\beta C_{t+1}^{-\gamma}}{C_{t}^{-\gamma}}R_{t+1}\right\} \\
+		R_{t+1}&=F_K(K_{t},N_{t+1};A_{t+1})+(1-\delta)
+	\end{align*}
+	\item Real side pinned down independent of nominal side.
+\end{itemize}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Next Steps}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}
+\frametitle{Next Steps
+}
+\begin{itemize}
+	\item For now we embrace the Classical Dichotomy and will analyze how prices and inflation are determined in our economy.
+	\begin{itemize}
+		\item Classical Dichotomy makes our life simpler here, without meaningfully changing conclusions.
+	\end{itemize}
+	\item Then we will at evidence for / against monetary neutrality.
+\end{itemize}
+\end{frame}
+
+\end{document}

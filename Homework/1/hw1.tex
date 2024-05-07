@@ -1,0 +1,147 @@
+
+
+\documentclass{article}
+
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage[comma,authoryear]{natbib}
+\usepackage{theorem}
+\usepackage[onehalfspacing]{setspace}
+\usepackage{indentfirst}
+\usepackage{float}
+\usepackage{geometry}
+\usepackage{enumerate}
+\usepackage{textcomp}
+
+
+\usepackage{tikz}
+\usetikzlibrary{intersections,calc}
+
+\usepackage{mathabx}
+
+\usepackage{url}
+
+\setcounter{MaxMatrixCols}{10}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{acknowledgement}{Acknowledgement}
+\newtheorem{algorithm}{Algorithm}
+\newtheorem{axiom}{Assumption}
+\newtheorem{case}{Case}
+\newtheorem{claim}{Claim}
+\newtheorem{conclusion}{Conclusion}
+\newtheorem{condition}{Condition}
+\newtheorem{conjecture}{Conjecture}
+\newtheorem{corollary}{Corollary}
+\newtheorem{criterion}{Criterion}
+{\theorembodyfont{\rmfamily}
+\newtheorem{definition}{Definition}
+}
+\newtheorem{example}{Example}
+\newtheorem{exercise}{Exercise}
+\newtheorem{lemma}{Lemma}
+\newtheorem{notation}{Notation}
+\newtheorem{problem}{Problem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{remark}{Remark}
+\newtheorem{solution}{Solution}
+\newtheorem{summary}{Summary}
+\newenvironment{proof}[1][Proof]{\noindent\textbf{#1.} }{\ \rule{0.5em}{0.5em}}
+\geometry{left=1in,right=1in,top=1in,bottom=1in} 
+
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\X}{\mathbb{X}}
+\newcommand{\1}{\mathbf{1}}
+
+\newcommand{\suchthat}{\;\ifnum\currentgrouptype=16 \middle\fi|\;}
+
+\newcommand\invisiblesection[1]{%
+  \refstepcounter{section}%
+  \addcontentsline{toc}{section}{\protect\numberline{\thesection}#1}%
+  \sectionmark{#1}}
+
+\def\citeapos#1{\citeauthor{#1}'s (\citeyear{#1})}
+
+\begin{document}
+
+\title{Econ 210C Homework 2}
+\author{Instructor: Johannes Wieland}
+\date{\color{red} Due: 5/13/2022, 11:59PM PST, on your Github repository.}
+\maketitle
+
+
+
+
+\section*{1. Complementarity of Money and Consumption}
+Suppose the utility function in our classical monetary model is now
+\begin{align*}
+	U(X_t,L_t)=\frac{X_t^{1-\gamma}-1}{1-\gamma}-\chi \frac{N_t^{1+\varphi}}{{1+\varphi}}
+\end{align*}
+where $X_t$ is a composite of consumption and money,
+\begin{align*}
+	X_t=\left[(1-\vartheta)C_t^{1-\nu}+\vartheta\left(\frac{M_t}{P_t}\right)^{1-\nu}\right]^{\frac{1}{1-\nu}}
+\end{align*}
+\begin{enumerate}[(a)]
+	\item Derive the first order conditions for this economy.
+	\item Under what conditions does this economy predict that money is neutral? Explain why.
+	\item Solve analytically for the steady state of the model (as far as you can), assuming $A=1$.
+	\item Based on your steady state equations describe an algorithm for how to solve for the steady state.
+	\item How would you calibrate $\vartheta$ given knowledge of $\nu$?
+	\item Derive the log-linearized model. 
+	\item Following your calibration strategy for each of $\nu\in\{0.25,0.5,1,2,4\}$, solve the model using sequence space methods using the following parameters:
+	\begin{align*} \gamma=1,\varphi=1,\chi=1,\beta=0.99,\rho_m=0.99
+	\end{align*}
+	where $m_t = \rho_m m_{t-1} + \epsilon_t^m$ and the steady state money supply is such that $P=1$ in steady state.
+	
+	Report the IRFs for consumption, prices, the nominal interest rate. Your graph for each variable should contain all five cases, appropriately labelled. 
+	\item Intuitively explain your results.
+	\item If you had evidence that an increase in the money supply increases consumption, which values for $\nu$ can you rule out? Explain why.
+	\item Make sure your code packet contains a file that produces your graphs with a single click. (It does not need to save the graphs.) Upload it to Github.
+\end{enumerate}
+
+
+%\section*{2. Controlling Inflation}
+%
+%The Fisher equation is
+%	\begin{align*}
+%		i_t = r_t + \E_t(\pi_{t+1}) \\
+%	\end{align*}
+%
+%The money demand equation is
+%\begin{align*}
+%	m_t - p_t &= c_t - \frac{1}{\nu}i_t + u_d^d - u_t^s
+%\end{align*}
+%
+%All exogenous variables AR(1) processes:
+%\begin{align*}
+%	c_t &= \rho_c c_{t-1} + \eta_t^c \\
+%	r_t &= \rho_r r_{t-1} + \eta_t^r \\
+%	u_t^d &= \rho_d u^d_{t-1} + \eta_t^d \\
+%	u^s_t &= \rho_s u^s_{t-1} + \eta_t^s 
+%\end{align*}
+%
+%\begin{enumerate}[(a)]
+%	\item Suppose that the central bank sets interest rates according to an interest rate (Taylor) rule:
+%	\begin{align*}
+%		i_t = \bar{i}_t + \phi \pi_t, \qquad \phi>1
+%	\end{align*}
+%	Solve for the equilibrium rate of inflation, assuming the terminal condition $\lim_{T\rightarrow\infty}\frac{1}{\phi^{T}}\pi_{t+T}=0$ holds.
+%	\item\label{optpol} The central bank has a sequence of inflation targets $\{\pi_{t+s}^*\}_{s=0}^{\infty}$. Define the control error as
+%	\begin{align*}
+%		\epsilon_t = \pi_t - \pi_t^*
+%	\end{align*}
+%	Derive an expression for how the central bank should set $\bar{i}_t$ to set the control error to zero.
+%	\item Describe this policy in words.
+%	\item The Fisher equation reflects expectations of the private sector. Suppose the central bank had different expectations $\E_t^{CB}$ based on private information. How would this affect your answer to part (\ref{optpol})?
+%	\item Suppose the central bank now sets the money supply $m_t$ rather than the nominal interest rate $i_t$. Derive the rate of inflation for this case.
+%	\item Derive an expression for how the central bank should set $m_t$ to set the control error to zero.
+%	\item In words, why might a central bank prefer to set policy based on $i_t$ rather than $m_t$ and vice-versa?
+%\end{enumerate}
+
+
+
+\end{document}

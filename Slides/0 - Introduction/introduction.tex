@@ -1,0 +1,341 @@
+\documentclass[english,xcolor=svgnames]{beamer}
+
+
+\input{../../../../Templates/Latex/teachingslidesbeamer.tex}
+
+
+\begin{document}
+
+\title{Introduction \\ Economics 210C}
+\vspace{1cm}
+\author[shortname]{
+\begin{tabular}{c}
+	Johannes Wieland \\ 
+	\footnotesize \href{mailto:jfwieland@ucsd.edu}{jfwieland@ucsd.edu}  \\ 
+\end{tabular}
+}
+
+\date{Spring \the\year}
+
+\setbeamertemplate{footline}{}
+\makebeamertitle
+\setbeamertemplate{footline}[frame number]{}
+
+\addtocounter{framenumber}{-1}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%\begin{frame}
+%\frametitle[alignment=center]{About Us}
+%%\begin{itemize}
+%%	\item Juan: PhD Columbia, \\
+%%	
+%%\end{itemize}
+%\end{frame}
+
+\begin{frame}
+\frametitle{210C Part 2: Monetary Economics}
+\begin{itemize}
+	\item Johannes Wieland
+	\begin{itemize}
+		\item jfwieland@ucsd.edu
+		\item Office Hours: Thu 10-11am.
+		\item Research Interest: Monetary Policy and Business Cycles
+	\end{itemize}
+	\item TA:
+	\begin{itemize}
+		\item John Juneau, jjuneau@ucsd.edu
+%		\item Section: Thu 5pm-6pm
+%		\item OH: Mon 1:30-2:30pm
+	\end{itemize}
+	\item Textbook: Jordi Gali's \emph{Monetary Policy, Inflation, and the Business Cycle}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Course Policies}
+\begin{itemize}
+	\item I care about making this course accessible and interesting.
+	\begin{itemize}
+		\item Please provide honest feedback.
+	\end{itemize}
+	\item Slides will be posted online ahead of class.
+	\begin{itemize}
+		\item Required readings are starred on the syllabus.
+	\end{itemize}
+	\item There will be many(!) typos.
+	\begin{itemize}
+%		\item Big revision to the course last year.
+		\item I will repost corrected slides.
+	\end{itemize}
+	\item PLEASE ask questions, challenge my conclusions, etc.
+%	\item Outside of class/OH, ask questions on Piazza discussion board: \href{piazza.com/ucsd/spring2021/econ210c}{piazza.com/ucsd/spring2021/econ210c}
+%	\item No electronic devices.
+%	\begin{itemize}
+%		\item Not enforced this year.
+%	\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Course Requirements}
+%{\bf This is my best projection for how the course will be assessed.}
+\begin{itemize}
+%	\item 18 lectures
+	\item Problem sets: 40\% of total grade
+	\begin{itemize}
+		\item Work in groups ($n\le 4$), do your own write up (and say who you worked with).
+		\item Each students submits own write-up (pdf or jupyter notebook) and code write on Github.
+		\begin{itemize}
+			\item Give us read access to your homework repository.
+		\end{itemize}
+		\item Check+, Check, Check-, Zero
+		\begin{itemize}
+			\item If you make an effort to answer every question you will get a check, which is considered full credit.
+			\item Check+ (=$1.25\times$ full credit) goes to the best attempt. If multiple attempts are equally strong on paper, then whichever answer executes code the fastest will get a Check+. Note that we may (and likely will) publish the best answer as a template for everyone else.
+		\end{itemize}
+		\item You should not share answers with other groups, but you can discuss the problems.
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Course Requirements}
+%{\bf This is my best projection for how the course will be assessed.}
+\begin{itemize}
+	\item Final (60\%):
+	\begin{itemize}
+		\item 8 hour take home final.
+		\item Assignment will be available starting Saturday, June 8 at 8am.
+		\item Will be a combination of data analysis, model computation, and write-up.
+		\item Open book: you can use lecture slides, textbook, internet, ``AI''.
+		\item But you are not allowed to discuss the midterm with any other person.
+		\item Submit on Canvas.
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+%\begin{frame}
+%\frametitle{Final Project}
+%\begin{itemize}
+%	\item Initial proposal:
+%	\begin{itemize}
+%		\item One-page summary:
+%		\begin{itemize}
+%			\item What is the question?
+%			\item Why is it interesting?
+%			\item How do you propose to answer it?
+%		\end{itemize}
+%		\item Due April 30 (Canvas).
+%		\item Will give feedback following week.
+%	\end{itemize}
+%	\item Final submission:
+%	\begin{itemize}
+%		\item Should be around 5 pages.
+%		\item Due June 8 (Canvas).
+%	\end{itemize}
+%	\item Graded on:
+%	\begin{itemize}
+%		\item 20\% Quality of initial proposal.
+%		\item 80\% Quality of final project.
+%%		\item 40\% Execution of final project.
+%	\end{itemize}
+%\end{itemize}	
+%\end{frame}
+
+
+
+
+\begin{frame}
+\frametitle[alignment=center]{Modern Macroeconomics}
+\begin{itemize}
+		\item Macroeconomics has a monopoly on the best questions and worst answers.
+	\begin{itemize}
+		\item Great area to do research!
+	\end{itemize}
+	\item Macroeconomist is a jack of all trades:
+	\begin{itemize}
+		\item Simple theoretical models.
+		\item Quantitative models.
+		\item Cross-sectional identification.
+		\item Time-series identification.
+	\end{itemize}
+	\item Why? Identification problems massive:
+	\begin{itemize}
+		\item Fed lowers interest rates in 2008. What do we learn about effects of monetary policy?
+		\item[$\Rightarrow$] Attack problem from many different angles.
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Modern Macroeconomics}
+\begin{itemize}
+	\item Can be difficult to appreciate macro:
+	\begin{itemize}
+		\item Unsettled field in many ways.
+		\item I will spend substantial time critiquing main models.
+		\item I will try to add some empirics, interesting papers, etc.
+	\end{itemize}
+	\item But will teach you the canon and focus on theory.
+	\item Even if you don't do macro, you will be asked about monetary policy for the rest of your life.
+\end{itemize}	
+\end{frame}
+
+
+%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\AtBeginSection[]{
+%\setbeamertemplate{footline}{}
+%  \frame<beamer>{ 
+%
+%    \frametitle{Outline}   
+%
+%    \tableofcontents[currentsection,hideallsubsections] 
+%  }
+%\setbeamertemplate{footline}[frame number]{}
+%\addtocounter{framenumber}{-1}
+%}
+%
+%\AtBeginSubsection[]{
+%\setbeamertemplate{footline}{}
+%  \frame<beamer>{ 
+%
+%    \frametitle{Outline}   
+%
+%    \tableofcontents[currentsection,currentsubsection] 
+%  }
+%  \setbeamertemplate{footline}[frame number]{}
+%  \addtocounter{framenumber}{-1}
+%}
+%
+%
+%
+%\setbeamertemplate{footline}{}
+%\begin{frame}
+%\frametitle{Outline}   
+%\tableofcontents[hideallsubsections] 
+%\end{frame}
+%\addtocounter{framenumber}{-1}
+%\setbeamertemplate{footline}[frame number]{}
+%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\section{Research Advice}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%\begin{frame}
+%\frametitle[alignment=center]{Seminars, Lunches, etc\footnote{This section is based on Adam Guren's slides.}}
+%\begin{itemize}
+%	\item Attending seminar and lunch is an important part of your PhD.
+%	\begin{itemize}
+%		\item Allows you to see cutting edge research, help improve peer's research, become part of research community.
+%		\item See how the sausage is made.
+%		\item In grad school I learned a lot from others' questions.
+%		\item Even if the topic is outside your immediate research area there are large spillovers from learning about techniques, data, and presentational skills.
+%	\end{itemize}
+%%	\item Great line-up of external speakers this quarter:
+%%	\begin{itemize}
+%%		\item Atif Mian, Sanjay Singh, Janice Eberly, John Mondragon, Diego Perez, Ricardo Reis, Kim Ruhl, Cecile Gaubert, Amy Handlan, Nick Bloom.
+%%	\end{itemize}
+%	\item If macro is a secondary field, fine to only attend seminar and lunch for your primary field. But should attend something!
+%\end{itemize}
+%\end{frame}
+%
+%
+%\begin{frame}
+%\frametitle[alignment=center]{Research Advice}
+%\begin{itemize}
+%	\item Becoming a researcher is hard.
+%	\begin{itemize}
+%		\item Requires learning by doing. Only so much one can explain.
+%	\end{itemize}
+%	\item \emph{Persistence} is key.
+%	\begin{itemize}
+%		\item \emph{Every} paper hits a roadblock that initially appears fatal.
+%		\item \emph{Every} idea is related to something else and has a moment where someone says ''that sounds like [insert citation here].''
+%		\item \emph{Every} researcher has days (or weeks or months) where they
+%work extremely hard and have nothing to show for it.
+%	\end{itemize}
+%	\item The key is being able to wake up and work just as hard and be just as dogged on the 10th day (or 30th or 100th) as you were on the first.
+%	\begin{itemize}
+%		\item Work on something you love that motivates you.
+%		\item Every paper has boring parts or frustrating parts. Learn to love
+%the challenge.
+%		\item Use habit formation to your advantage.
+%	\end{itemize}
+%\end{itemize}
+%\end{frame}
+%
+%
+%\begin{frame}
+%\frametitle[alignment=center]{Working Together}
+%\begin{itemize}
+%	\item I personally love to work with others.
+%	\begin{itemize}
+%		\item More fun.
+%		\item Fewer dead ends, less of an echo chamber.
+%		\item Motivate each other, give each other deadlines.
+%	\end{itemize}
+%	\item Talk to each other. Co-author if you come up with an interesting idea.
+%	\item You will learn as much from your peers as from the faculty.
+%	\begin{itemize}
+%		\item Get to know each other!
+%		\item Help each other with research. Workshop ideas. Talk economics. Have fun together.
+%		\item My PhD classmates are some of my best friends.
+%		\item I continue to learn from my classmates today.
+%	\end{itemize}
+%\end{itemize}
+%\end{frame}
+%
+%
+%\begin{frame}
+%\frametitle[alignment=center]{How To Come Up With Ideas}
+%\begin{itemize}
+%	\item Most difficult part of research.
+%	\item DON'T just sit there waiting for an idea.
+%	\begin{itemize}
+%		\item Work on something. You will bump into things.
+%	\end{itemize}
+%	\item Talk to others! Often papers come out of conversations.
+%%	\begin{itemize}
+%%		\item Research is not a solo activity, even though it may seem like it.
+%%	\end{itemize}
+%	\item Read a lot, and read critically.
+%	\begin{itemize}
+%		\item Look for connections between topics.
+%		\item Look for holes in literature, reasons to doubt papers.
+%	\end{itemize}
+%	\item Play with data, look for facts.
+%	\item Go through \emph{lots} of ideas. Discard aggressively.
+%	\begin{itemize}
+%		\item Market rewards the max of all your ideas.
+%		\item When you do come up with something, ask: ``What is the best case scenario for this paper if everything works out?''
+%		\item If not good enough, move on. 
+%		\item Try to get a sense within 1-2 weeks if it is worth continuing. 
+%		\item Can always return later if you see a way to get a more promising outcome.
+%	\end{itemize}
+%	\item Work on what you love.
+%\end{itemize}
+%\end{frame}
+%
+%
+%\begin{frame}
+%\frametitle[alignment=center]{My JMP}
+%\begin{itemize}
+%	\item Came out of a conversation with a classmate over coffee.
+%	\item Standard New Keynesian model predicted that Japan would be booming after Earthquake.
+%	\begin{itemize}
+%		\item Did it really?
+%	\end{itemize}
+%	\item Spent about one year gathering other evidence. Most of it discarded on the way of writing the paper and some more in the publication process. Only test with oil supply shocks made it into the final paper.
+%\end{itemize}
+%\end{frame}
+
+
+\end{document}
