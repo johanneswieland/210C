@@ -1,0 +1,1190 @@
+\documentclass[english,xcolor=svgnames]{beamer}
+
+
+\input{../../../../Templates/Latex/teachingslidesbeamer.tex}
+
+
+
+\begin{document}
+
+\title{Solving Models in Sequence Space \\ Economics 210C}
+\vspace{1cm}
+\author[shortname]{
+\begin{tabular}{c}
+	Johannes Wieland \\ 
+	\footnotesize \href{mailto:jfwieland@ucsd.edu}{jfwieland@ucsd.edu}  \\ 
+\end{tabular}
+}
+
+\date{Spring \the\year}
+
+\setbeamertemplate{footline}{}
+\makebeamertitle
+\setbeamertemplate{footline}[frame number]{}
+
+\addtocounter{framenumber}{-1}
+
+
+
+%\begin{frame}
+%\frametitle[alignment=center]{Reminders}
+%\begin{enumerate}
+%	\item First project draft due May 1.
+%	\item Participation.
+%\end{enumerate}
+%\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\AtBeginSection[]{
+\setbeamertemplate{footline}{}
+  \frame<beamer>{ 
+
+    \frametitle{Outline}   
+
+    \tableofcontents[currentsection,hideallsubsections] 
+  }
+\setbeamertemplate{footline}[frame number]{}
+\addtocounter{framenumber}{-1}
+}
+
+\AtBeginSubsection[]{
+\setbeamertemplate{footline}{}
+  \frame<beamer>{ 
+
+    \frametitle{Outline}   
+
+    \tableofcontents[currentsection,currentsubsection] 
+  }
+  \setbeamertemplate{footline}[frame number]{}
+  \addtocounter{framenumber}{-1}
+}
+
+
+
+\setbeamertemplate{footline}{}
+\begin{frame}
+\frametitle{Outline}   
+\tableofcontents[hideallsubsections] 
+\end{frame}
+\addtocounter{framenumber}{-1}
+\setbeamertemplate{footline}[frame number]{}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+   \frametitle{Introduction}
+   \begin{itemize}
+       \item Today will be heavy.
+       \item We will learn how to solve models in sequence space.
+       \item Basic idea: organize models into ``blocks'' that represent behavior of (possibly heterogeneous) agents, and interact in GE via a small set of aggregates.
+       \item We will arrange these blocks into Directed Acyclic Graph (``DAG''). Helpful to solve model, think about causality in GE, do decompositions, etc.
+   \end{itemize}
+   \centering
+   \includegraphics[scale=0.3]{dag/demandsupply.png}
+\end{frame}
+
+
+%\begin{frame}
+%    \frametitle{Objective}
+%    \begin{itemize}
+%        \item Hard when there is rich heterogeneity.
+%        \item Infinitely dimensional state space from the distribution of agent's endogenous state variables---how to handle it?
+%        \item In macro, we are often interested what happens when aggregate shock X hits the economy (monetary, fiscal, etc).
+%        \item State space: must forecast infinite-dimensional distribution to estimate prices / quantities relevant to agents' problem.
+%        \item Sequence space: must find price / quantity sequences that solve market clearing conditions.
+%        \item[$\Rightarrow$] Sequence space is of dimension $T \times \text{number of variables}$, versus infinite dimensional state space. 
+%       	\item Cost: linearization / perfect foresight.
+%    \end{itemize}
+%\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The Linearized RBC Model}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Equilibrium Definition}
+An equilibrium is an allocation $\{C_{t+s},N_{t+s},Y_{t+s},B_{t+s}\}_{s=0}^{\infty}$, a set of prices $\{W_{t+s},P_{t+s},Q_{t+s}\}_{s=0}^{\infty}$, an exogenous processes $\{A_{t+s},Tr_{t+s},M_{t+s}\}_{s=0}^{\infty}$ and initial conditions for bonds and capital $B_{t-1}$ such that:
+\begin{enumerate}[1.]
+	\item Households maximize utility subject to budget constraints.
+	\item Firms maximize profits given their technology.
+	\item The government satisfies its budget constraint.
+	\item Markets clear:
+	\begin{enumerate}[3.1.]
+		\item Labor demanded equals labor supplied.
+		\item Bond issuance by the government equals bond holding by households.
+		\item Money issuance by the government equals money holdings by households.
+		\item Output equals consumption plus investment.
+	\end{enumerate}
+\end{enumerate}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Equilibrium Equations}
+\begin{align*}
+	Y_t&=A_tN_{t}  \\
+	\frac{W_t}{P_t}&= A_t  \\
+	\frac{W_t}{P_t}&=\frac{\chi N_t^\varphi}{C_t^{-\gamma}} \\
+	Y_t&=C_t \\
+	1&=\beta E_t\left\{R_{t+1} \frac{C_{t+1}^{-\gamma}}{C_{t}^{-\gamma}}\right\} 
+\end{align*}
+\end{frame}
+
+\begin{frame}
+\frametitle{Linearized Equilibrium Equations}
+\begin{itemize}
+	\item Notation: $\hat{x} = \frac{X_t-\bar{X}}{\bar{X}}\approx \ln\frac{X_t}{\bar{X}}$
+\end{itemize}
+\begin{align*}
+	\hat{y}_t&=\hat{a}_t + \hat{n}_{t}  \\
+	\hat{w}_t - \hat{p}_t &= \hat{a}_t  \\
+	\hat{w}_t - \hat{p}_t &=\varphi \hat{n}_t + \gamma \hat{c}_t \\
+	\hat{y}_t&=\hat{c}_t \\
+	0&= E_t\left\{\hat{r}_{t+1} -  \gamma (\hat{c}_{t+1} - \hat{c}_{t})\right\} 
+\end{align*}
+\end{frame}
+
+\begin{frame}
+    \frametitle{General Sequence Space Representation}
+    \begin{itemize}
+        \item Equilibrium is a solution to an equation
+        \begin{align*}
+        	\mathbf{H}(\mathbf{U}, \mathbf{Z}) = 0
+        \end{align*}
+        where
+        \begin{itemize}
+        	\item $\mathbf{U}$ represents the time path $U_0,U_1,...,$ of unknown aggregate sequences (e.g., quantities, prices).
+        	\item $\mathbf{Z}$ represents the time path $Z_0,Z_1,...,$ of known exogenous shocks.
+        \end{itemize}
+        \item Totally differentiate and evaluate at steady state to get:
+        \begin{align*}
+        	d\mathbf{U} = -\mathbf{H}_{\mathbf{U}}(\mathbf{\bar{U}}, \mathbf{\bar{Z}})^{-1}\mathbf{H}_{\mathbf{Z}}(\mathbf{\bar{U}}, \mathbf{\bar{Z}})d\mathbf{Z}
+        \end{align*}
+        \item Solution requires finding the sequence-space Jacobians $\mathbf{H}_{\mathbf{U}}$ and $\mathbf{H}_{\mathbf{Z}}$.
+	\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{DAG Representation}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+	\frametitle{Solving in Sequence Space}
+	\begin{itemize}
+		\item Organize the model in blocks.
+		\begin{enumerate}
+			\item Firm block:
+			\begin{align*}
+				\hat{y}_t&=\hat{a}_t + \hat{n}_{t}  \\
+				\hat{w}_t - \hat{p}_t &= \hat{a}_t  
+			\end{align*}
+			\item Household block:
+			\begin{align*}
+				\hat{w}_t - \hat{p}_t &=\varphi \hat{n}_t + \gamma \hat{c}_t 
+			\end{align*}
+			\item Market clearing block:
+			\begin{align*}
+				0&=\hat{c}_t - \hat{y}_t 
+			\end{align*}
+		\end{enumerate}
+	\end{itemize}
+	\end{frame}
+
+	
+	\begin{frame}
+		\frametitle{Sequence Space Algorithm Heuristics}
+			\begin{enumerate}
+				\item Start with an initial guess of the sequences $(\mathbf{\hat{n}})=\{\hat{n}_{t}\}_{t=0}^{\infty}$.
+				\begin{itemize}
+					\item $\mathbf{\hat{a}}=\{a_t\}_{t=0}^{\infty}$ are given to us.
+				\end{itemize}
+				\item Solve the firm block for $\mathbf{\hat{y}}$ and $\mathbf{\hat{w}-\hat{p}}$.
+				\item Solve the household block for $\mathbf{\hat{c}}$.
+				\item Check that market clears. If not update guess $\mathbf{\hat{n}}$
+				\begin{itemize}
+					\item In turns out we do not need to guess, but can solve the entire system with linear algebra in one step.
+					\item Approach follows equilibrium definition: find sequences such that everyone optimizes and markets clear.
+				\end{itemize}
+			\end{enumerate}
+	\end{frame}
+	
+	\begin{frame}
+		\frametitle{DAG Representation}
+			\begin{itemize}
+				\item Effectively what we have done is organized our model in a Directed Acyclical Graph (DAG).
+			\end{itemize}
+			\centering
+			\includegraphics[scale=0.4]{dag/rbcsimple.png}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{DAG Rules}
+			\begin{itemize}
+				\item There are no cycles in a DAG---we travel in one direction only.
+				\item A model has many DAG representations.
+				\begin{itemize}
+					\item One representation is to treat every endogenous variable as unknown and have single block.
+					\item Another representation is to treat each equation as an individual block.
+					\item These are often not the most useful representation.
+				\end{itemize}
+			\end{itemize}
+	\end{frame}
+	
+	\begin{frame}
+		\frametitle{DAG Suggestions}
+			\begin{itemize}
+				\item A good DAG minimizes the number of unknowns.
+				\item Generally useful to organize blocks by agent: household, firm, union, government, market clearing.
+				\item Blocks make updating the model easy. Often we change just one problem (e.g., firm for NK model) and leave others untouched.
+				\item Logical check for each block: are the number of variables to solve for equal to the number of equations?
+				\item The computer can organize our model in a DAG and substitute for us.
+				\item Today we will see what the computer does under the hood.
+			\end{itemize}
+	\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Moving Along the DAG}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+	\begin{frame}
+		\frametitle{Solving in Sequence Space}
+			\begin{itemize}
+				\item We want to clear markets at all points in time:
+				\begin{align*}
+					\mathbf{H} = \begin{pmatrix}
+						\hat{c}_0 - \hat{y}_0 \\
+						\vdots \\
+						\hat{c}_T  - \hat{y}_T \\
+					\end{pmatrix} = \begin{pmatrix}
+						\Phi_{gm,c}\mathbf{\hat{c}} +  \Phi_{gm,y}\mathbf{\hat{y}} 
+					\end{pmatrix} = \mathbf{0}
+				\end{align*}
+				where
+				\begin{align*}
+					\Phi_{gm,c} &= I_T \\
+					\Phi_{gm,y} &= -I_T
+				\end{align*}
+				and $I_T$ is the $T\times T$ identity matrix.
+				\item How does adjusting the sequences $\mathbf{U} = (\mathbf{\hat{n}})$ change the target?
+				\begin{align*}
+					\mathbf{H}_{\mathbf{U}} = \begin{pmatrix}
+						\Phi_{gm,c}\frac{\partial\mathbf{\hat{c}}}{\partial \mathbf{\hat{n}} } + \Phi_{gm,y}\frac{\partial\mathbf{\hat{y}}}{\partial \mathbf{\hat{n}} }
+					\end{pmatrix}
+				\end{align*}
+	%			\item These are all objects we can compute.
+			\end{itemize}
+	\end{frame}
+	
+	
+	\begin{frame}
+		\frametitle{Solving in Sequence Space}
+			\begin{itemize}
+				\item A simpler and equivalent expression to work with is
+				\begin{align*}
+					\mathbf{H}_{\mathbf{U}} = \begin{pmatrix}
+						\Phi_{gm,c}  & \Phi_{gm,y}  & \mathbf{0}_T 
+					\end{pmatrix}
+					\begin{pmatrix}
+						\frac{\partial\mathbf{\hat{c}}}{\partial \mathbf{\hat{n}} } \\ 
+						\frac{\partial\mathbf{\hat{y}}}{\partial \mathbf{\hat{n}} } \\
+						\frac{\partial\mathbf{\hat{w}-\hat{p}}}{\partial \mathbf{\hat{n}} } 
+					\end{pmatrix} \equiv \frac{\partial \mathbf{H}}{\partial \mathbf{Y}}\frac{\partial \mathbf{Y}}{\partial \mathbf{U}}
+				\end{align*}
+				\item Now we move along using the chain rule:
+				\begin{align*}
+					\frac{\partial \mathbf{Y}}{\partial \mathbf{U}} = \begin{pmatrix}
+						\frac{\partial \mathbf{c}}{\partial \mathbf{U}} \\
+						\frac{\partial (\mathbf{\hat{y}},\mathbf{(\hat{w}-\hat{p})})}{\partial \mathbf{U}}\\
+					\end{pmatrix} \\
+				\end{align*}
+				where we partitioned based on the two blocks we looked at earlier.
+			\end{itemize}
+	\end{frame}
+	
+	
+	\begin{frame}
+		\frametitle{Solving in Sequence Space}
+			\begin{itemize}
+				\item We start with the firm block:
+				\begin{align*}
+					\hat{y}_t&=\hat{a}_t + \hat{n}_{t} \\
+					\hat{w}_t - \hat{p}_t &= \hat{a}_t 
+				\end{align*}
+				\item In matrix notation:
+				\begin{align*}
+					\mathbf{\hat{y}} &= \Phi_{y,a}\mathbf{\hat{a}} + \Phi_{y,n}\mathbf{\hat{n}} \\
+					\mathbf{\hat{w}-\hat{p}} &= \Phi_{wp,a}\mathbf{\hat{a}}
+				\end{align*}
+				\item The matrices are:
+				\begin{align*}
+					\Phi_{y,a}&=I_T\\
+					\Phi_{y,n}&=I_T \\
+					\Phi_{wp,a}&=I_T 
+				\end{align*}
+			\end{itemize}
+	\end{frame}
+
+	
+	\begin{frame}
+		\frametitle{Solving in Sequence Space}
+			\begin{itemize}
+				\item With $\mathbf{\hat{w}-\hat{p}}$ and $\mathbf{\hat{n}}$  we solve for $\mathbf{\hat{c}}$ using the household FOC for labor supply:
+				\begin{align*}
+					 \hat{c}_t  &= \gamma^{-1}(\hat{w}_t - \hat{p}_t)- \gamma^{-1}\varphi \hat{n}_t   
+				\end{align*}
+				\item In matrix notation:
+				\begin{align*}
+					\mathbf{\hat{c}} &= \Phi_{c,wp}(\mathbf{\hat{w}-\hat{p}}) + \Phi_{c,n}\mathbf{\hat{n}}  
+				\end{align*}
+				\item The matrices are:
+				\begin{align*}
+					\Phi_{c,wp}&=\gamma^{-1}I_T \\
+					\Phi_{c,n}&=-\gamma^{-1} \varphi I_T
+				\end{align*}
+			\end{itemize}
+	\end{frame}
+	
+	
+	
+	
+	\begin{frame}
+		\frametitle{Solving in Sequence Space}
+			\begin{itemize}
+				\item From the firm block we have:
+				\begin{align*}
+					\frac{\partial (\mathbf{\hat{y}},\mathbf{(\hat{w}-\hat{p})})}{\partial \mathbf{U}} = \begin{pmatrix}
+						\Phi_{y,n} \\
+						\Phi_{wp,n} \\
+					\end{pmatrix}
+				\end{align*}
+				\item From the household block we have:
+				\begin{align*}
+					\frac{\partial \mathbf{\hat{c}}}{\partial \mathbf{U}} &= \begin{pmatrix}
+						 \Phi_{c,n} + \Phi_{c,wp}\frac{d\mathbf{\hat{w}-\hat{p}}}{\partial \mathbf{\hat{n}} } 
+					\end{pmatrix} \\
+					&= \begin{pmatrix}
+						\Phi_{c,n} \\
+					\end{pmatrix}
+				\end{align*}
+				\item We solved for $\mathbf{H}_{\mathbf{U}}$:
+				\begin{align*}
+					\mathbf{H}_{\mathbf{U}} =&\begin{pmatrix}
+						\Phi_{gm,c} & - I_T & \mathbf{0}_T  \\ 
+					\end{pmatrix} \times  \begin{pmatrix}
+						\Phi_{c,n} \\
+						\Phi_{y,n} \\
+						\Phi_{wp,n} \\
+					\end{pmatrix}
+					= \begin{pmatrix}
+						\Phi_{gm,c}\Phi_{c,n} - \Phi_{y,n} 
+					\end{pmatrix} 
+				\end{align*}
+			\end{itemize}
+	\end{frame}
+	
+	
+	
+	\begin{frame}
+		\frametitle{Solving in Sequence Space}
+			\begin{itemize}
+				\item Solving for $\mathbf{H}_{\mathbf{Z}}$ is a bit more straightforward:
+				\begin{align*}
+					\mathbf{H}_{\mathbf{Z}} = \frac{\partial \mathbf{H}}{\partial \mathbf{Y}}\frac{\partial \mathbf{Y}}{\partial \mathbf{Z}} \\
+				\end{align*}
+				We already know the first derivative.
+				\item From the firm block we have:
+				\begin{align*}
+					\frac{\partial (\mathbf{\hat{y}},\mathbf{(\hat{w}-\hat{p})})}{\partial \mathbf{Z}} = \begin{pmatrix}
+						I_T  \\
+						I_T  \\
+					\end{pmatrix}
+				\end{align*}
+				\item From the household block we have:
+				\begin{align*}
+					\frac{\partial \mathbf{\hat{c}}}{\partial \mathbf{Z}} &= \begin{pmatrix}
+						\Phi_{c,wp}\frac{\partial\mathbf{\hat{w}-\hat{p}}}{\partial \mathbf{\hat{a}} } 
+					\end{pmatrix} = \begin{pmatrix}
+						\Phi_{c,wp} 
+					\end{pmatrix}
+				\end{align*}
+			\end{itemize}
+	\end{frame}
+	
+	
+	
+	
+	\begin{frame}
+		\frametitle{Solving in Sequence Space}
+			\begin{itemize}
+				\item We solved for $\mathbf{H}_{\mathbf{Z}}$:
+				\begin{align*}
+					\mathbf{H}_{\mathbf{Z}} =&\begin{pmatrix}
+						\Phi_{gm,c} & - I_T & \mathbf{0}_T \\ 
+					\end{pmatrix}  \times \begin{pmatrix}
+						\Phi_{c,wp} \\ 
+						I_T  \\
+						I_T  \\
+					\end{pmatrix} = 
+					\begin{pmatrix}
+						\Phi_{gm,c}\Phi_{c,wp} - I_T
+					\end{pmatrix}
+				\end{align*}
+				\item We now have the solution to the model:
+					\begin{align*}
+						d\mathbf{U} = -\mathbf{H}_{\mathbf{U}}^{-1}\mathbf{H}_{\mathbf{Z}}d\mathbf{Z}
+					\end{align*}
+					and calculate the remaining sequences
+					\begin{align*}
+						d\mathbf{Y} = \frac{\partial \mathbf{Y}}{\partial \mathbf{U}}d\mathbf{U} +  \frac{\partial \mathbf{Y}}{\partial \mathbf{Z}}d\mathbf{Z} = (\frac{\partial \mathbf{Y}}{\partial \mathbf{U}}\mathbf{H}_{\mathbf{U}}^{-1}\mathbf{H}_{\mathbf{Z}} +  \frac{\partial \mathbf{Y}}{\partial \mathbf{Z}})d\mathbf{Z}
+					\end{align*}
+			\end{itemize}
+	\end{frame}
+	
+	\begin{frame}
+		\frametitle{Solving in Sequence Space}
+			\begin{itemize}
+				\item If you plug in:
+				\begin{align*}
+					d\mathbf{U} &= -\mathbf{H}_{\mathbf{U}}^{-1}\mathbf{H}_{\mathbf{Z}}d\mathbf{Z} \\
+								&= - \begin{pmatrix}
+									\Phi_{gm,c}\Phi_{c,n} - \Phi_{y,n} 
+								\end{pmatrix}^{-1}   \begin{pmatrix}
+									\Phi_{gm,wp}\Phi_{c,wp} - I_T
+								\end{pmatrix}d\mathbf{Z} \\
+								&=  (1 + \gamma^{-1}\varphi)^{-1}  (\gamma^{-1} - 1) \mathbf{Z} \\
+								&=  (\gamma + \varphi)^{-1}  (1 - \gamma) \mathbf{Z} \\
+								&= \mathbf{\hat{n}}
+				\end{align*}
+				\item Then solve for the other sequences.
+			\end{itemize}
+	\end{frame}
+	
+	
+	\begin{frame}
+		\frametitle{Lessons}
+			\begin{itemize}
+				\item Can solve any linearized dynamic model using linear algebra.
+				\item Extremely fast once matrices are created.
+				\begin{itemize}
+					\item If we tell the computer that the matrices are sparse (mostly 0s).
+				\end{itemize}
+				\item Replaced substitution with matrix multiplication.
+				\item Strategy follows equilibrium definition: looking for sequence such that everyone optimizes and markets clear. 
+				\item Everyone should do this once by hand. Then let the computer do the work for you.
+			\end{itemize}
+	\end{frame}
+
+% \begin{frame}
+% \frametitle{Simplified Linearized Equilibrium Equations}
+% \begin{align*}
+% 	0 &= (\gamma+\varphi)\hat{c}_t - (1+\varphi)\hat{a}_t  \\
+% 	0&= E_t\left\{\hat{r}_{t+1} -  \gamma (\hat{c}_{t+1} - \hat{c}_{t})\right\} 
+% \end{align*}
+% \begin{itemize}
+% 	\item Interpretation:
+% 	\begin{enumerate}
+% 		\item Goods and labor markets clear, firms and households optimize.
+% 		\item Real rate is such that households are happy with their consumption path.
+% 	\end{enumerate}
+% \end{itemize}
+% \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\section{State Space}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%\begin{frame}
+%    \frametitle{State Space Approach}
+%    \begin{itemize}
+%        \item Solve for policies and prices as functions of the state.
+%        \item State: what is given to you today.
+%        \item Policy: what you chose based on FOC.
+%        \item Prices: those that implement the equilibrium (market clearing)
+%        \item Requires specifying a law of motion for the exogenous states.
+%	\end{itemize}
+%\end{frame}
+%
+%\begin{frame}
+%    \frametitle{General State Space Representation}
+%    \begin{itemize}
+%        \item The general state space representation of a linearized macro model (including HANK) is:
+%        \begin{align*}
+%        	s_{t} &= A s_{t-1} + B\epsilon_t\\
+%        	 y_t &= C s_{t}  + D\epsilon_t
+%        \end{align*}
+%        \begin{itemize}
+%        	\item The first equation describes the evolution of the state $s$.
+%        	\item The first equation describes the observation equation of the endogenous $s$
+%        	\item We do not know all of $A,B,C,D$. Need to solve for them.
+%        	\item Works well even for large number of states (hundreds), but cannot easily be done in models with distributions (infinite number of states).
+%        \end{itemize}
+%	\end{itemize}
+%\end{frame}
+%
+%\begin{frame}
+%    \frametitle{Example: RBC model}
+%    \begin{itemize}
+%    	\item State: $s_t = \hat{a}_t$
+%    	\item Evolution of the state:
+%    	\begin{align*}
+%    		\hat{a}_t = \rho_a \hat{a}_{t-1} + \epsilon_t^a
+%    	\end{align*}
+%    	Already know evolution of the state: $A = \rho_a$ and $B=1$.
+%    	\item Endogenous variables:
+%    	\begin{align*}
+%    		y_t = \begin{pmatrix}
+%    			\hat{c}_t \\ \E_t\hat{r}_{t+1}
+%    		\end{pmatrix}
+%    	\end{align*}
+%        \item Model is of the form $My_{t+1}+Ny_t = Os_t$. Have to figure out solution $y_t = C s_{t}  + D\epsilon_t$.
+%        \item Trivial here. 
+%%        \item More complicated with capital. Dynare will solve this for you, but you will not learn much.
+%%        \item In an RBC model with capital:
+%%        \begin{itemize}
+%%        	\item State: $\hat{a}_t, \hat{k}_{t-1}$
+%%        	\item Policies: $c(\hat{a}_t,\hat{k}_{t-1}), n(\hat{a}_t,\hat{k}_{t-1}), y(\hat{a}_t,\hat{k}_{t-1}), k(\hat{a}_t,\hat{k}_{t-1})$
+%%        	\item Prices: $r^k(\hat{a}_t,\hat{k}_{t-1}), (w-p)(\hat{a}_t,\hat{k}_{t-1})$
+%%        	\item Exogenous LoM: $\hat{a}_t = \rho_a \hat{a}_{t-1} + \epsilon_t^a$
+%%        \end{itemize}
+%%        \item Note: in our linear model these will be linear functions.
+%		\item More complicated with capital. Dynare will solve this for you using the Blanchard-Kahn decomposition. But not much economics.
+%	\end{itemize}
+%\end{frame}
+
+%\begin{frame}
+%    \frametitle{Example: RBC model with capital}
+%    \begin{itemize}
+%    	\item State: 
+%    	\begin{align*}
+%    		s_t = \begin{pmatrix}
+%    			\hat{a}_t \\ \hat{k}_{t-1}
+%    		\end{pmatrix}
+%    	\end{align*}
+%    	\item Evolution of the state:
+%    	\begin{align*}
+%    		\hat{a}_t = \rho_a \hat{a}_{t-1} + \epsilon_t^a
+%    	\end{align*}
+%    	So $A = \rho_a$ and $B=1$.
+%    	\begin{itemize}
+%    		\item Already know evolution of the state.
+%    		\item Not true generally, e.g., with capital.
+%    	\end{itemize}
+%    	\item Endogenous variables:
+%    	\begin{align*}
+%    		y_t = \begin{pmatrix}
+%    			\hat{c}_t \\ \E_t\hat{r}_{t+1}
+%    		\end{pmatrix}
+%    	\end{align*}
+%        \item Model is of the form $My_{t+1}+Ny_t = Os_t$. Have to figure out solution $y_t &= C s_{t}  + D\epsilon_t$.
+%        \item Trivial here. 
+%        \item More complicated with capital. Dynare will solve this for you, but you will not learn much.
+%%        \item In an RBC model with capital:
+%%        \begin{itemize}
+%%        	\item State: $\hat{a}_t, \hat{k}_{t-1}$
+%%        	\item Policies: $c(\hat{a}_t,\hat{k}_{t-1}), n(\hat{a}_t,\hat{k}_{t-1}), y(\hat{a}_t,\hat{k}_{t-1}), k(\hat{a}_t,\hat{k}_{t-1})$
+%%        	\item Prices: $r^k(\hat{a}_t,\hat{k}_{t-1}), (w-p)(\hat{a}_t,\hat{k}_{t-1})$
+%%        	\item Exogenous LoM: $\hat{a}_t = \rho_a \hat{a}_{t-1} + \epsilon_t^a$
+%%        \end{itemize}
+%%        \item Note: in our linear model these will be linear functions.
+%	\end{itemize}
+%\end{frame}
+
+
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \section{Sequence Space}
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \begin{frame}
+%     \frametitle{Sequence Space Approach}
+%     \begin{itemize}
+%         \item Solve for sequences of policies and prices given a known sequence of exogenous shocks.
+%         \item Aligns closely with equilibrium definition.
+% %        \item More specific than state space in that we do not solve for general functions.
+%         \item Typically used in heterogeneous agent literature where characterizing the equilibrium as a function of the state is difficult. 
+%         \item A disadvantage is that the sequence space approach assumes perfect foresight. 
+% 	\end{itemize}
+% \end{frame}
+
+
+
+% \begin{frame}
+%     \frametitle{Sequence Space Representation of RBC}
+%     \begin{itemize}
+%         \item At every point in time:
+%         \begin{align*}
+% 	\mathbf{H}_t(\mathbf{\hat{c}},\mathbf{\hat{a}}) &= \begin{pmatrix} (\gamma+\varphi)\hat{c}_t - (1+\varphi)\hat{a}_t  \\
+% 	 \hat{r}_{t+1} -  \gamma (\hat{c}_{t+1} - \hat{c}_{t}) \end{pmatrix} = \begin{pmatrix}
+% 		0 \\ 0
+% 	\end{pmatrix} ,\qquad \forall t\ge 0
+% \end{align*}
+% 	\item First write every equation individually in sequence space:
+% 	\hspace{-2cm}\begin{align*}
+% 		 (\gamma + \phi)\begin{pmatrix}
+% 	1 & 0 & \hdots & 0 \\
+% 	0 & 1 & \ddots & 0 \\
+% 	\vdots & 0 & \ddots & 0 \\
+% 	0 & 0 & \hdots & 1 \\	
+% \end{pmatrix}\begin{pmatrix}
+% 	\hat{c}_0 \\
+% 	\hat{c}_1 \\
+% 	\vdots \\
+% 	\hat{c}_T \\	
+% \end{pmatrix} - (1 + \phi)\begin{pmatrix}
+% 	1 & 0 & \hdots & 0 \\
+% 	0 & 1 & \ddots & 0 \\
+% 	\vdots & 0 & \ddots & 0 \\
+% 	0 & 0 & \hdots & 1 \\	
+% \end{pmatrix}\begin{pmatrix}
+% 	\hat{a}_0 \\
+% 	\hat{a}_1 \\
+% 	\vdots \\
+% 	\hat{a}_T \\	
+% \end{pmatrix} = \begin{pmatrix}
+% 	0 \\
+% 	0 \\
+% 	0 \\
+% 	0 \\	
+% \end{pmatrix}\\
+% \gamma\begin{pmatrix}
+% 	1 & -1 & 0 & \hdots & 0 \\
+% 	0 & 1 & -1 & \ddots & 0 \\
+% 	\vdots &  0 & \ddots & \ddots & 0 \\
+% 	0 & 0 & \ddots & 1 & -1 \\	
+% 	0 & 0 & \hdots & 0 & 1 \\	
+% \end{pmatrix}\begin{pmatrix}
+% 	\hat{c}_0 \\
+% 	\hat{c}_1 \\
+% 	\vdots \\
+% 	\hat{c}_T \\	
+% \end{pmatrix} + \begin{pmatrix}
+% 	1 & 0 & 0 & \hdots & 0 \\
+% 	0 & 1 & 0 &\ddots & 0 \\
+% 	\vdots & 0 & \ddots & \ddots & 0 \\
+% 	0 & 0 & \ddots & 1 & 0 \\	
+% 	0 & 0 & \hdots & 0 & 1 \\	
+% \end{pmatrix}\begin{pmatrix}
+% 	\hat{r}_0 \\
+% 	\hat{r}_1 \\
+% 	\vdots \\
+% 	\hat{r}_T \\	
+% \end{pmatrix} = \begin{pmatrix}
+% 	0 \\
+% 	0 \\
+% 	0 \\
+% 	0 \\	
+% \end{pmatrix}
+% 	\end{align*}
+% 	\end{itemize}
+% \end{frame}
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \section{Solving RBC in Sequence Space}
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \begin{frame}
+%     \frametitle{Solving RBC in Sequence Space}
+%     \begin{itemize}
+%         \item Simplify as
+%         \begin{align*}
+% 		 \mathbf{A}\mathbf{\hat{c}} + \mathbf{B} \mathbf{\hat{a}} = \mathbf{0}\\
+% \mathbf{C}\mathbf{\hat{c}} + \mathbf{D}\mathbf{\hat{r}} = \mathbf{0}
+% 	\end{align*}
+% 	\item One approach is to stack everything.
+% 	\begin{align*}
+% 		\begin{pmatrix}
+% 			\mathbf{A} & \mathbf{0} \\
+% 			\mathbf{C} & \mathbf{D}
+% 		\end{pmatrix}\begin{pmatrix}
+% 			\mathbf{\hat{c}} \\
+% 			\mathbf{\hat{r}}
+% 		\end{pmatrix} + \begin{pmatrix}
+% 			\mathbf{B} \\ \mathbf{0} 
+% 		\end{pmatrix}\begin{pmatrix}
+% 			\mathbf{\hat{a}}
+% 		\end{pmatrix} = \mathbf{0}
+% 	\end{align*}
+%       \item This is linear algebra.
+%       \begin{align*}
+%       	\begin{pmatrix}
+% 			\mathbf{\hat{c}} \\
+% 			\mathbf{\hat{r}}
+% 		\end{pmatrix} = \begin{pmatrix}
+% 			\mathbf{A} & \mathbf{0} \\
+% 			\mathbf{C} & \mathbf{D}
+% 		\end{pmatrix}^{-1} \begin{pmatrix}
+% 			-\mathbf{B} \\ \mathbf{0} 
+% 		\end{pmatrix}\begin{pmatrix}
+% 			\mathbf{\hat{a}}
+% 		\end{pmatrix} = \begin{pmatrix}
+% 			-\mathbf{A}^{-1}\mathbf{B} \\ \mathbf{D}^{-1} \mathbf{C}\mathbf{A}^{-1}\mathbf{B}
+% 		\end{pmatrix}\begin{pmatrix}
+% 			\mathbf{\hat{a}}
+% 		\end{pmatrix}
+%       \end{align*}
+%       \end{itemize}
+% \end{frame}
+
+%\begin{frame}
+%    \frametitle{Sequence Space Approach}
+%    \begin{itemize}
+%        \item Why don't we just do $\mathbf{\hat{c}}=\mathbf{A}^{-1}\mathbf{B}\mathbf{\hat{a}}$ and then substitute?
+%        \item Indeed we should! 
+%        \item The computer can do this for us as well, which is helpful for more complex models.
+%        \item We will see this idea is closely connected to the Directed Acyclical Graph (DAG) representation, which is useful way to organize models.
+%	\end{itemize}
+%\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Adding Capital}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+    \frametitle{More Sequence Space}
+    \begin{itemize}
+        \item Our model had a simple static solution, so we did not need the sequence space.
+        \item We now add capital to the model, which makes the solution dynamic.
+        \item We will see how to use the sequence space in this more complex environment.
+        % \item We will discuss how it is related to the concept of a Directed Acyclical Graph (DAG), which (in my view) is a useful way to solve the model with the underlying economics.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Capital}
+    \begin{itemize}
+        \item The production function:
+        \begin{align*}
+        	Y_t=A_tN_{t}^{1-\alpha}K_{t-1}^{\alpha}
+        \end{align*}
+        \item Capital depreciates at rate $\delta$
+        \begin{align*}
+        	K_t = (1-\delta)K_{t-1} + I_t
+        \end{align*}
+        \item The real rental rate of capital is the marginal product of labor.
+        \begin{align*}
+        	R_t^k&= \alpha A_tN_{t}^{-\alpha}K_{t-1}^{\alpha} 
+        \end{align*}
+        \item The household has to be indifferent between investing in a bond or capital
+        \begin{align*}
+        	R_{t+1} = R_{t+1}^k + 1 - \delta
+        \end{align*}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+    \frametitle{FOC with Capital}
+        \begin{align*}
+			Y_t&=A_tN_{t}^{1-\alpha}K_{t-1}^{\alpha}  \\
+			R_t^k&= \alpha A_tN_{t}^{-\alpha}K_{t-1}^{\alpha}   \\
+			\frac{W_t}{P_t}&= (1-\alpha)A_tN_{t}^{-\alpha}K_{t-1}^{\alpha}  \\
+			\frac{W_t}{P_t}&=\frac{\chi N_t^\varphi}{C_t^{-\gamma}} \\
+			Y_t&=C_t + I_t \\
+			1&=\beta R_{t+1} \frac{C_{t+1}^{-\gamma}}{C_{t}^{-\gamma}} \\
+			1&=\beta (R_{t+1}^k + 1 - \delta) \frac{C_{t+1}^{-\gamma}}{C_{t}^{-\gamma}} \\
+			K_t &= (1-\delta)K_{t-1} + I_t
+		\end{align*}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Linearized FOC with Capital}
+        \begin{align*}
+			\hat{y}_t&=\hat{a}_t + (1-\alpha)\hat{n}_{t} +\alpha \hat{k}_{t-1} \\
+			\hat{r}_t^k&=\hat{a}_t + (1-\alpha)\hat{n}_{t} +(\alpha-1) \hat{k}_{t-1} \\
+			\hat{w}_t - \hat{p}_t &= \hat{a}_t -\alpha\hat{n}_{t} +\alpha \hat{k}_{t-1} \\
+			\hat{w}_t - \hat{p}_t &=\varphi \hat{n}_t + \gamma \hat{c}_t \\
+			\hat{y}_t&=s_c\hat{c}_t + (1-s_c)\hat{\iota}_t \\
+			0&= \hat{r}_{t+1} -  \gamma (\hat{c}_{t+1} - \hat{c}_{t})\\
+			0&= (1-\beta(1-\delta))\hat{r}_{t+1}^k -  \gamma (\hat{c}_{t+1} - \hat{c}_{t}) \\
+			\hat{k}_t &= (1-\delta)\hat{k}_{t-1} + \delta\hat{\iota}_t
+		\end{align*}
+\end{frame}
+
+
+% \begin{frame}
+%     \frametitle{Repeated substitution}
+%         \begin{align*}
+% %			  \hat{c}_t &= \frac{1}{\gamma}\hat{a}_t -\frac{1}{\gamma}(\alpha+\varphi)\hat{n}_{t} +\frac{\alpha}{\gamma} \hat{k}_{t-1} \\
+% 			0 &=(\frac{s_c}{\gamma}-1)\hat{a}_t -[\frac{s_c}{\gamma}(\alpha+\varphi)+1-\alpha]\hat{n}_{t} \\
+% 			& +[\frac{s_c \alpha}{\gamma}-\alpha - \frac{(1-s_c)(1-\delta)}{\delta}] \hat{k}_{t-1} + \frac{1-s_c}{\delta}\hat{k}_t   \\
+% %			0&= (1-\beta(1-\delta))(\hat{a}_{t+1} + (1-\alpha)\hat{n}_{t+1} +\alpha \hat{k}_{t}) -  \hat{a}_{t+1} +(\alpha+\varphi)\hat{n}_{t+1} -\alpha \hat{k}_{t} + \hat{a}_t -(\alpha+\varphi)\hat{n}_{t} +\alpha \hat{k}_{t-1}  \\
+% 			0&= -\beta(1-\delta)\hat{a}_{t+1} + [(1-\beta(1-\delta))(1-\alpha)+(\alpha+\varphi)]\hat{n}_{t+1} \\
+% 			& -[\beta(1-\delta)\alpha+1] \hat{k}_{t}    + \hat{a}_t -(\alpha+\varphi)\hat{n}_{t} +\alpha \hat{k}_{t-1} 
+% 		\end{align*}
+% 		\begin{itemize}
+% 			\item Two equations, two unknowns $\hat{k}_{t-1},\hat{n}_{t}$.
+% 			\item Can set up matrices, stack them as before. Calculate
+% 			\begin{align*}
+%         	d\mathbf{U} = \mathbf{H}_{\mathbf{U}}(\mathbf{\bar{U}}, \mathbf{\bar{Z}})^{-1}\mathbf{H}_{\mathbf{Z}}(\mathbf{\bar{U}}, \mathbf{\bar{Z}})d\mathbf{Z}
+%         \end{align*}
+% 			\item Can be cumbersome and error-prone.
+% 		\end{itemize}
+% \end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{More Solving in Sequence Space}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+    \frametitle{Solving in Sequence Space}
+		\begin{itemize}
+			\item Organize the model in blocks.
+			\begin{enumerate}
+				\item Firm block:
+				\begin{align*}
+					\hat{y}_t&=\hat{a}_t + (1-\alpha)\hat{n}_{t} +\alpha \hat{k}_{t-1} \\
+					\hat{r}_t^k&=\hat{a}_t + (1-\alpha)\hat{n}_{t} +(\alpha-1) \hat{k}_{t-1} \\
+					\hat{w}_t - \hat{p}_t &= \hat{a}_t -\alpha\hat{n}_{t} +\alpha \hat{k}_{t-1} 
+				\end{align*}
+				\item Household block:
+				\begin{align*}
+					\hat{w}_t - \hat{p}_t &=\varphi \hat{n}_t + \gamma \hat{c}_t \\
+					\hat{k}_t &= (1-\delta)\hat{k}_{t-1} + \delta\hat{\iota}_t
+				\end{align*}
+				\item Market clearing block:
+				\begin{align*}
+					0&=s_c\hat{c}_t + (1-s_c)\hat{\iota}_t -\hat{y}_t \\
+					0&= (1-\beta(1-\delta))\hat{r}_{t+1}^k -  \gamma (\hat{c}_{t+1} - \hat{c}_{t}) \\
+				\end{align*}
+			\end{enumerate}
+		\end{itemize}
+		
+\end{frame}
+
+% \begin{frame}
+%     \frametitle{Sequence Space Algorithm Heuristics}
+% 		\begin{enumerate}
+% 			\item Start with an initial guess of the sequences $(\mathbf{\hat{k}},\mathbf{\hat{n}})=\{\hat{k}_{t},\hat{n}_{t}\}_{t=0}^{\infty}$.
+% 			\begin{itemize}
+% 				\item $\mathbf{\hat{a}}=\{a_t\}_{t=0}^{\infty}$ and $\hat{k}_{t-1}$ are given to us.
+% 			\end{itemize}
+% 			\item Solve the firm block for $\mathbf{\hat{y}}$, $\mathbf{\hat{w}-\hat{p}}$ and $\mathbf{\hat{r}^k}$.
+% 			\item Solve the household block for $\mathbf{\hat{c}}$ and $\mathbf{\hat{\iota}}$.
+% 			\item Check that market clears. If not update guess $(\mathbf{\hat{k}},\mathbf{\hat{n}})$
+% 			% \begin{itemize}
+% 			% 	\item In turns out we do not need to guess, but can solve the entire system with linear algebra in one step.
+% 			% 	\item Approach follows equilibrium definition: find sequences such that everyone optimizes and markets clear.
+% 			% \end{itemize}
+% 		\end{enumerate}
+% \end{frame}
+
+
+
+
+\begin{frame}
+    \frametitle{DAG Representation}
+		\begin{itemize}
+			\item We have a new Directed Acyclical Graph (DAG) for our model with capital.
+		\end{itemize}
+		\centering
+		\includegraphics[scale=0.4]{dag/RBC.png}
+\end{frame}
+
+
+
+
+\begin{frame}
+    \frametitle{Solving in Sequence Space}
+		\begin{itemize}
+			\item We start with the market clearing block:
+			\begin{align*}
+				 	0&=s_c\hat{c}_t + (1-s_c)\hat{\iota}_t - \hat{y}_t \\
+					0&= (1-\beta(1-\delta))\hat{r}_{t+1}^k -  \gamma (\hat{c}_{t+1} - \hat{c}_{t})
+			\end{align*}
+			\item In matrix notation:
+			\begin{align*}
+				\mathbf{0} &= \Phi_{gm,c}\mathbf{\hat{c}} + \Phi_{gm,\iota}\mathbf{\hat{\iota}} - \mathbf{\hat{y}} \\
+				\mathbf{0} &= \Phi_{eul,rk}\mathbf{\hat{r}^k} + \Phi_{eul,c}\mathbf{\hat{c}} 
+			\end{align*}
+			\item The matrices are:
+			\begin{align*}
+				\Phi_{gm,c} &= s_c I_T & \Phi_{gm,\iota} &= (1-s_c)I_T \quad \\
+				\Phi_{eul,rk} &= (1-\beta(1-\delta))I_T & \Phi_{eul,c} &= -\gamma I_T 
+			\end{align*}
+			\item  $I_T$ is the $T\times T$ identity matrix. 
+			\item Note timing of $\mathbf{\hat{r}^k}=\{\hat{r}_{t+1},...,\hat{r}_{T+1}\}$ sequence.
+			% \item Can start with a guess $(\mathbf{\hat{k}},\mathbf{\hat{n}})$ and iterate until we get zeros. This means all markets clear and everyone optimizes.
+			% \item A smarter way of solving is the chain rule.
+		\end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Solving in Sequence Space}
+		\begin{itemize}
+			\item We want to clear markets at all points in time:
+			\begin{align*}
+				\mathbf{H} = \begin{pmatrix}
+					s_c\hat{c}_0 + (1-s_c)\hat{\iota}_0 - \hat{y}_0 \\
+					\vdots \\
+					s_c\hat{c}_T + (1-s_c)\hat{\iota}_T - \hat{y}_T \\
+					 \hat{r}_{1}^k -  \gamma (\hat{c}_{T+1} - \hat{c}_{T})\\
+					\vdots \\
+					 \hat{r}_{T}^k -  \gamma (\hat{c}_{T} - \hat{c}_{T-1}) \\
+					    \gamma  \hat{c}_{T} \\
+				\end{pmatrix} = \begin{pmatrix}
+					\Phi_{gm,c}\mathbf{\hat{c}} + \Phi_{gm,\iota}\mathbf{\hat{\iota}} - \mathbf{\hat{y}}\\
+					\Phi_{eul,rk}\mathbf{\hat{r}^k} + \Phi_{eul,c}\mathbf{\hat{c}}  
+				\end{pmatrix} = \mathbf{0}
+			\end{align*}
+			\item How does adjusting the sequences $\mathbf{U} = (\mathbf{\hat{k}},\mathbf{\hat{n}})$ change the target?
+			\begin{align*}
+				\mathbf{H}_{\mathbf{U}} = \begin{pmatrix}
+					\Phi_{gm,c}\frac{\partial\mathbf{\hat{c}}}{\partial \mathbf{\hat{k}} } + \Phi_{gm,\iota}\frac{\partial\mathbf{\hat{\iota}}}{\partial \mathbf{\hat{k}} } - \frac{\partial\mathbf{\hat{y}}}{\partial \mathbf{\hat{k}} } & \Phi_{gm,c}\frac{\partial\mathbf{\hat{c}}}{\partial \mathbf{\hat{n}} } + \Phi_{gm,\iota}\frac{\partial\mathbf{\hat{\iota}}}{\partial \mathbf{\hat{n}} } - \frac{\partial\mathbf{\hat{y}}}{\partial \mathbf{\hat{n}} }\\
+					\Phi_{eul,rk}\frac{\partial\mathbf{\hat{r}^k}}{\partial \mathbf{\hat{k}} } + \Phi_{eul,c}\frac{\partial\mathbf{\hat{c}}}{\partial \mathbf{\hat{k}} } & \Phi_{eul,rk}\frac{\partial\mathbf{\hat{r}^k}}{\partial \mathbf{\hat{n}} } + \Phi_{eul,c}\frac{\partial\mathbf{\hat{c}}}{\partial \mathbf{\hat{n}} } 
+				\end{pmatrix}
+			\end{align*}
+%			\item These are all objects we can compute.
+		\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+    \frametitle{Solving in Sequence Space}
+		\begin{itemize}
+			\item A simpler and equivalent expression to work with is
+			\begin{align*}
+				\mathbf{H}_{\mathbf{U}} = \begin{pmatrix}
+					\Phi_{gm,c} & \Phi_{gm,\iota} & - I_T & \mathbf{0}_T & \mathbf{0}_T \\ 
+					\Phi_{eul,c} & \mathbf{0}_T & \mathbf{0}_T & \Phi_{eul,rk} & \mathbf{0}_T  
+				\end{pmatrix}
+				\begin{pmatrix}
+					\frac{\partial\mathbf{\hat{c}}}{\partial \mathbf{\hat{k}} } & \frac{\partial\mathbf{\hat{c}}}{\partial \mathbf{\hat{n}} } \\ \frac{\partial\mathbf{\hat{\iota}}}{\partial \mathbf{\hat{k}} } & \frac{\partial\mathbf{\hat{\iota}}}{\partial \mathbf{\hat{n}} } \\ \frac{\partial\mathbf{\hat{y}}}{\partial \mathbf{\hat{k}} } & \frac{\partial\mathbf{\hat{y}}}{\partial \mathbf{\hat{n}} } \\
+					\frac{\partial\mathbf{\hat{r}^k}}{\partial \mathbf{\hat{k}} } & \frac{\partial\mathbf{\hat{r}^k}}{\partial \mathbf{\hat{n}} } \\
+					\frac{\partial\mathbf{\hat{w}-\hat{p}}}{\partial \mathbf{\hat{k}} } &  \frac{\partial\mathbf{\hat{w}-\hat{p}}}{\partial \mathbf{\hat{n}} } 
+				\end{pmatrix} \equiv \frac{\partial \mathbf{H}}{\partial \mathbf{Y}}\frac{\partial \mathbf{Y}}{\partial \mathbf{U}}
+			\end{align*}
+			\item Now we move along using the chain rule:
+			\begin{align*}
+				\frac{\partial \mathbf{Y}}{\partial \mathbf{U}} = \begin{pmatrix}
+					\frac{\partial (\mathbf{c},\mathbf{\iota})}{\partial \mathbf{U}} \\
+					\frac{\partial (\mathbf{\hat{y}},\mathbf{\hat{r}^k},\mathbf{(\hat{w}-\hat{p})})}{\partial \mathbf{U}}\\
+				\end{pmatrix} \\
+			\end{align*}
+			where we partitioned based on the two blocks we looked at earlier.
+		\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+    \frametitle{Solving in Sequence Space}
+		\begin{itemize}
+			\item Then from production function we know the firm produces output:
+			\begin{align*}
+				\hat{y}_t&=\hat{a}_t + (1-\alpha)\hat{n}_{t} +\alpha \hat{k}_{t-1} 
+			\end{align*}
+			\item In matrix notation:
+			\begin{align*}
+				\mathbf{\hat{y}} &= \mathbf{\hat{a}} + \Phi_{y,n}\mathbf{\hat{n}} + \Phi_{y,k}\mathbf{\hat{k}} + \Phi_{y,k_{-1}}\hat{k}_{-1}
+			\end{align*}
+			\item The matrices are:
+			\begin{align*}
+				\Phi_{y,n}&=(1-\alpha)I_T,\\ \Phi_{y,k}&=\alpha \begin{pmatrix} 
+					0 & 0 & \hdots & 0 & 0 \\
+					1 & 0 & \hdots & 0 & 0 \\
+					0 & 1 & \ddots & 0 & 0 \\
+					\vdots & \ddots & \ddots & 0 & 0 \\
+					0 & 0 & \hdots & 1 & 0
+				\end{pmatrix},\; 
+				\Phi_{y,k_{-1}}=\begin{pmatrix}
+					1 & 0 & \hdots & 0 \\
+					0 & 0 & \hdots & 0 \\
+					\vdots & \vdots & \ddots & 0 \\
+					0 & 0 & \hdots & 0
+				\end{pmatrix}
+			\end{align*}
+			where $I_T$ is the $T\times T$ identity matrix.
+		\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+    \frametitle{Solving in Sequence Space}
+		\begin{itemize}
+			\item From the firm FOC we can also compute the sequence of prices:
+			\begin{align*}
+				\hat{r}_{t+1}^k&=\hat{a}_{t+1} + (1-\alpha)\hat{n}_{t+1} +(\alpha-1) \hat{k}_{t}  \\
+				\hat{w}_t - \hat{p}_t &= \hat{a}_t -\alpha\hat{n}_{t} +\alpha \hat{k}_{t-1} 
+			\end{align*}
+			\item We shift capital return one period forward since that is what we need in the Euler equation.
+			\item In matrix notation:
+			\begin{align*}
+				\mathbf{\hat{r}^k} &= \Phi_{rk,a}\mathbf{\hat{a}} + \Phi_{rk,n}\mathbf{\hat{n}} + \Phi_{rk,k}\mathbf{\hat{k}}  \\
+				\mathbf{\hat{w}-\hat{p}} &= \Phi_{wp,a}\mathbf{\hat{a}} + \Phi_{wp,n}\mathbf{\hat{n}} + \Phi_{wp,k}\mathbf{\hat{k}} + \Phi_{wp,k_{-1}}\hat{k}_{-1} 
+			\end{align*}
+		\end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Solving in Sequence Space}
+	\begin{itemize}
+		\item The matrices are
+		\begin{align*}
+			\Phi_{rk,a}&=\begin{pmatrix}
+				0 & 1 & 0 & \hdots & 0 \\
+				0 & 0 & 1 & \ddots & 0 \\
+				\vdots & \ddots & \ddots & \ddots & 0 \\
+				0 & \ddots & \ddots & 0 & 1 \\
+				0 & 0 & \hdots & 0 & 0
+			\end{pmatrix} \\
+			\Phi_{rk,n}&=(1-\alpha) \Phi_{rk,a}  \\
+			\Phi_{rk,k}&=-(1-\alpha)I_T  \\
+			\Phi_{wp,a}&=I_T \\
+			\Phi_{wp,n}&=-\alpha I_T \\
+			\Phi_{wp,k}&=\Phi_{y,k}
+		\end{align*}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+    \frametitle{Solving in Sequence Space}
+		\begin{itemize}
+			\item With $\mathbf{\hat{w}-\hat{p}}$ and $(\mathbf{\hat{k}},\mathbf{\hat{n}})$  we solve for $\mathbf{\hat{c}}$ and $\mathbf{\hat{\iota}}$ using the household FOC for labor supply and the capital accumulation equation. 
+			\begin{align*}
+				 \hat{c}_t  &= \gamma^{-1}(\hat{w}_t - \hat{p}_t)- \gamma^{-1}\varphi \hat{n}_t   \\
+				\hat{k}_t &= (1-\delta)\hat{k}_{t-1} + \delta\hat{\iota}_t
+			\end{align*}
+			\item In matrix notation:
+			\begin{align*}
+				\mathbf{\hat{c}} &= \Phi_{c,wp}(\mathbf{\hat{w}-\hat{p}}) + \Phi_{c,n}\mathbf{\hat{n}}   \\
+				\mathbf{\hat{\iota}} &= \Phi_{\iota,k}\mathbf{\hat{k}} + \Phi_{\iota,k_{-1}}\hat{k}_{-1}
+			\end{align*}
+			\item The matrices are $\Phi_{c,wp}=\gamma^{-1}I_T$, $\Phi_{c,n}=-\gamma^{-1} \varphi I_T$ and
+			\begin{align*}
+				\Phi_{\iota,k}&=\frac{1}{\delta} \begin{pmatrix}
+					 1 & 0 & \hdots & 0 \\
+					 \delta-1 & 1 & \ddots & \vdots \\
+					\vdots &\ddots & \ddots  & 0 \\
+					0 & \hdots  & \delta-1 & 1 \\
+				\end{pmatrix}
+			\end{align*}
+		\end{itemize}
+\end{frame}
+
+
+
+
+\begin{frame}
+    \frametitle{Solving in Sequence Space}
+		\begin{itemize}
+			\item From the firm block we have:
+			\begin{align*}
+				\frac{\partial (\mathbf{\hat{y}},\mathbf{\hat{r}^k},\mathbf{(\hat{w}-\hat{p})})}{\partial \mathbf{U}} = \begin{pmatrix}
+					\Phi_{y,k} & \Phi_{y,n} \\
+					\Phi_{rk,k} & \Phi_{rk,n} \\
+					\Phi_{wp,k} & \Phi_{wp,n} \\
+				\end{pmatrix}
+			\end{align*}
+			\item From the household block we have:
+			\begin{align*}
+				\frac{\partial (\mathbf{\hat{c}},\mathbf{\iota})}{\partial \mathbf{U}} &= \begin{pmatrix}
+					\Phi_{c,wp}\frac{\partial\mathbf{\hat{w}-\hat{p}}}{\partial \mathbf{\hat{k}} } & \Phi_{c,n} + \Phi_{c,wp}\frac{d\mathbf{\hat{w}-\hat{p}}}{\partial \mathbf{\hat{n}} } \\
+					\Phi_{\iota,k} & \mathbf{0} \\
+				\end{pmatrix} \\
+				&= \begin{pmatrix}
+					\Phi_{c,wp}\Phi_{wp,k} & \Phi_{c,n} + \Phi_{c,wp}\Phi_{wp,n} \\
+					\Phi_{\iota,k} & \mathbf{0} \\
+				\end{pmatrix}
+			\end{align*}
+		\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+    \frametitle{Solving in Sequence Space}
+		\begin{itemize}
+			\item We solved for $\mathbf{H}_{\mathbf{U}}$:
+			\begin{align*}
+				\mathbf{H}_{\mathbf{U}} =&\begin{pmatrix}
+					\Phi_{gm,c} & \Phi_{gm,\iota} & - I_T & \mathbf{0}_T & \mathbf{0}_T \\ 
+					\Phi_{eul,c} & \mathbf{0}_T & \mathbf{0}_T & \Phi_{eul,rk} & \mathbf{0}_T  
+				\end{pmatrix} \times \\
+				& \times \begin{pmatrix}
+					\Phi_{c,wp}\Phi_{wp,k} & \Phi_{c,n} + \Phi_{c,wp}\Phi_{wp,n} \\
+					\Phi_{\iota,k} & \mathbf{0} \\
+					\Phi_{y,k} & \Phi_{y,n} \\
+					\Phi_{rk,k} & \Phi_{rk,n} \\
+					\Phi_{wp,k} & \Phi_{wp,n} \\
+				\end{pmatrix}
+			\end{align*}
+		\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+    \frametitle{Solving in Sequence Space}
+		\begin{itemize}
+			\item Solving for $\mathbf{H}_{\mathbf{Z}}$ is a bit more straightforward:
+			\begin{align*}
+				\mathbf{H}_{\mathbf{Z}} = \frac{\partial \mathbf{H}}{\partial \mathbf{Y}}\frac{\partial \mathbf{Y}}{\partial \mathbf{Z}} \\
+			\end{align*}
+			We already know the first derivative.
+			\item From the firm block we have:
+			\begin{align*}
+				\frac{\partial (\mathbf{\hat{y}},\mathbf{\hat{r}^k},\mathbf{(\hat{w}-\hat{p})})}{\partial \mathbf{Z}} = \begin{pmatrix}
+					I_T  \\
+					\Phi_{rk,a}  \\
+					I_T  \\
+				\end{pmatrix}
+			\end{align*}
+			\item From the household block we have:
+			\begin{align*}
+				\frac{\partial (\mathbf{\hat{c}},\mathbf{\iota})}{\partial \mathbf{U}} &= \begin{pmatrix}
+					\Phi_{c,wp}\frac{\partial\mathbf{\hat{w}-\hat{p}}}{\partial \mathbf{\hat{a}} } \\ \mathbf{0} 
+				\end{pmatrix} = \begin{pmatrix}
+					\Phi_{c,wp} \\ \mathbf{0} 
+				\end{pmatrix}
+			\end{align*}
+		\end{itemize}
+\end{frame}
+
+
+
+
+\begin{frame}
+    \frametitle{Solving in Sequence Space}
+		\begin{itemize}
+			\item We solved for $\mathbf{H}_{\mathbf{Z}}$:
+			\begin{align*}
+				\mathbf{H}_{\mathbf{Z}} =&\begin{pmatrix}
+					\Phi_{0,c} & \Phi_{0,\iota} & - I_T & \mathbf{0}_T & \mathbf{0}_T \\ 
+					\Phi_{0,c} & \mathbf{0}_T & \mathbf{0}_T & \Phi_{0,rk} & \mathbf{0}_T  
+				\end{pmatrix}  \times \begin{pmatrix}
+					\Phi_{c,wp} \\ 
+					\mathbf{0}  \\
+					I_T  \\
+					\Phi_{rk,a}  \\
+					I_T  \\
+				\end{pmatrix}
+			\end{align*}
+			\item We now have the solution to the model:
+				\begin{align*}
+					d\mathbf{U} = \mathbf{H}_{\mathbf{U}}^{-1}\mathbf{H}_{\mathbf{Z}}d\mathbf{Z}
+				\end{align*}
+				and calculate the remaining sequences
+				\begin{align*}
+					d\mathbf{Y} = \frac{\partial \mathbf{Y}}{\partial \mathbf{U}}d\mathbf{U} +  \frac{\partial \mathbf{Y}}{\partial \mathbf{Z}}d\mathbf{Z} = (\frac{\partial \mathbf{Y}}{\partial \mathbf{U}}\mathbf{H}_{\mathbf{U}}^{-1}\mathbf{H}_{\mathbf{Z}} +  \frac{\partial \mathbf{Y}}{\partial \mathbf{Z}})d\mathbf{Z}
+				\end{align*}
+		\end{itemize}
+\end{frame}
+
+
+
+
+\begin{frame}
+    % \frametitle{Results}
+	\vspace{-0.5cm}
+		\includegraphics[scale=0.4]{IRFs.png}
+\end{frame}
+
+
+
+
+\end{document}
