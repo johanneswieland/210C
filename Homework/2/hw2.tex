@@ -1,0 +1,110 @@
+
+
+\documentclass{article}
+
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage[comma,authoryear]{natbib}
+\usepackage{theorem}
+\usepackage[onehalfspacing]{setspace}
+\usepackage{indentfirst}
+\usepackage{float}
+\usepackage{geometry}
+\usepackage{enumerate}
+\usepackage{textcomp}
+
+
+\usepackage{tikz}
+\usetikzlibrary{intersections,calc}
+
+\usepackage{mathabx}
+
+\usepackage{url}
+
+\setcounter{MaxMatrixCols}{10}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{acknowledgement}{Acknowledgement}
+\newtheorem{algorithm}{Algorithm}
+\newtheorem{axiom}{Assumption}
+\newtheorem{case}{Case}
+\newtheorem{claim}{Claim}
+\newtheorem{conclusion}{Conclusion}
+\newtheorem{condition}{Condition}
+\newtheorem{conjecture}{Conjecture}
+\newtheorem{corollary}{Corollary}
+\newtheorem{criterion}{Criterion}
+{\theorembodyfont{\rmfamily}
+\newtheorem{definition}{Definition}
+}
+\newtheorem{example}{Example}
+\newtheorem{exercise}{Exercise}
+\newtheorem{lemma}{Lemma}
+\newtheorem{notation}{Notation}
+\newtheorem{problem}{Problem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{remark}{Remark}
+\newtheorem{solution}{Solution}
+\newtheorem{summary}{Summary}
+\newenvironment{proof}[1][Proof]{\noindent\textbf{#1.} }{\ \rule{0.5em}{0.5em}}
+\geometry{left=1in,right=1in,top=1in,bottom=1in} 
+
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\X}{\mathbb{X}}
+\newcommand{\1}{\mathbf{1}}
+
+\newcommand{\suchthat}{\;\ifnum\currentgrouptype=16 \middle\fi|\;}
+
+\newcommand\invisiblesection[1]{%
+  \refstepcounter{section}%
+  \addcontentsline{toc}{section}{\protect\numberline{\thesection}#1}%
+  \sectionmark{#1}}
+
+\def\citeapos#1{\citeauthor{#1}'s (\citeyear{#1})}
+
+\begin{document}
+
+\title{Econ 210C Homework 2}
+\author{Instructor: Johannes Wieland}
+\date{\color{red} Due: 5/22/2023, 11:59PM PST, on Github.}
+\maketitle
+
+
+
+\section*{1. VARs}
+Download data for the Federal Funds Rate, the civilian unemployment rate, and the GDP deflator inflation rate from FRED.
+\begin{enumerate}[(a)]
+	\item Plot the data. Make sure all graphs are appropriately labelled.
+	\item Aggregate all series to a quarterly frequency by averaging over months.
+\end{enumerate}
+Estimate a VAR with 4 lags from 1960Q1:2007Q4. The ordering of your variables should be $\pi_t,u_t,R_t$.
+\begin{enumerate}[(a)]\setcounter{enumi}{2}
+	\item Briefly, explain why it would make sense to end the sample in 2007Q4?
+	\item Plot the IRFs from the SVAR with the same ordering. [Optional: add 95\% error bands]
+	\item Briefly, interpret your results.
+	\item Plot the time series of your identified monetary shocks.
+	\item What are the identified monetary shocks in 2001Q3 and 2001Q4? How should one interpret these shocks?
+\end{enumerate}
+
+
+\section*{2. Romer shocks}
+\begin{enumerate}[(a)]
+	\item Download the Romer-Romer shocks from my website and merge it with your VAR dataset. Set the values of the Romer shocks to zero before 1969Q1.
+	\item Following Romer-Romer, construct the IRF from the estimation equation
+	\begin{align*}
+		y_t = \alpha + \sum_{s=1}^{8}\beta_s y_{t-s} + \sum_{s=0}^{12}\gamma_{s}RR_{t-s}
+	\end{align*}
+	where $y_t\in[\pi_t,u_t,R_t]$ are the outcome variables and $RR_t$ are the Romer shocks estimated from 1960Q1:2007Q4. [Optional: add 95\% error bands]
+	\item Now estimate an SVAR ordered $RR_t,\pi_t,u_t,R_t$ with four lags from 1960Q1:2007Q4 and plot the IRFs. [Optional: add 95\% error bands]
+	\item Briefly, explain why it is sensible to order the Romer shock first in the VAR.
+	\item Compare the IRFs for the Romer shocks from the two methods. How are they different, and why?
+	\item Compare the VAR IRFs for the Romer shocks with the VAR IRFs for the SVAR shocks in Question (1d). How are they different, and why?
+	\item Compare the Romer-Romer the identified monetary shocks in 2001Q3 and 2001Q4 with the SVAR identified monetary shocks. How are they similar / different?
+\end{enumerate}
+
+
+\end{document}
