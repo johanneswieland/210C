@@ -1,0 +1,116 @@
+
+
+\documentclass{article}
+
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage[comma,authoryear]{natbib}
+\usepackage{theorem}
+\usepackage[onehalfspacing]{setspace}
+\usepackage{indentfirst}
+\usepackage{float}
+\usepackage{geometry}
+\usepackage{enumerate}
+\usepackage{textcomp}
+
+
+\usepackage{tikz}
+\usetikzlibrary{intersections,calc}
+
+\usepackage{mathabx}
+
+\usepackage{url}
+
+\setcounter{MaxMatrixCols}{10}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{acknowledgement}{Acknowledgement}
+\newtheorem{algorithm}{Algorithm}
+\newtheorem{axiom}{Assumption}
+\newtheorem{case}{Case}
+\newtheorem{claim}{Claim}
+\newtheorem{conclusion}{Conclusion}
+\newtheorem{condition}{Condition}
+\newtheorem{conjecture}{Conjecture}
+\newtheorem{corollary}{Corollary}
+\newtheorem{criterion}{Criterion}
+{\theorembodyfont{\rmfamily}
+\newtheorem{definition}{Definition}
+}
+\newtheorem{example}{Example}
+\newtheorem{exercise}{Exercise}
+\newtheorem{lemma}{Lemma}
+\newtheorem{notation}{Notation}
+\newtheorem{problem}{Problem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{remark}{Remark}
+\newtheorem{solution}{Solution}
+\newtheorem{summary}{Summary}
+\newenvironment{proof}[1][Proof]{\noindent\textbf{#1.} }{\ \rule{0.5em}{0.5em}}
+\geometry{left=1in,right=1in,top=1in,bottom=1in} 
+
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\X}{\mathbb{X}}
+\newcommand{\1}{\mathbf{1}}
+
+\newcommand{\suchthat}{\;\ifnum\currentgrouptype=16 \middle\fi|\;}
+
+\newcommand\invisiblesection[1]{%
+  \refstepcounter{section}%
+  \addcontentsline{toc}{section}{\protect\numberline{\thesection}#1}%
+  \sectionmark{#1}}
+
+\def\citeapos#1{\citeauthor{#1}'s (\citeyear{#1})}
+
+\begin{document}
+
+\title{Econ 210C Homework 3}
+\author{Instructor: Johannes Wieland}
+\date{\color{red} Due: 05/29/2023, 11:59PM PST. Submit pdf write-up and zipped code packet on Github.}
+\maketitle
+
+\section*{1. Sticky Wage Model}
+Instead of assuming that prices are sticky for one period, we now assume that nominal wages are sticky for one period,
+\begin{align*}
+	W_1 = W_0
+\end{align*}
+The short-run equilibrium is
+\begin{align*}
+	Y_1&=A_1N_{1}  \\
+	\color{red}W_1&\color{red}= W_0  \\
+	\frac{W_1}{P_1}&=A_1 \\
+	Y_1&=C_1 \\
+	\frac{M_1}{P_1}&=\zeta^{1/\nu}\left(1-\frac{1}{Q_1}\right)^{-1/\nu}C_{1}^{\gamma/\nu}\\
+	1&=\beta E_1\left\{Q_1 \frac{P_1}{P_{2}} \frac{C_{2}^{-\gamma}}{C_{1}^{-\gamma}}\right\} 
+\end{align*}
+The long-run equilibrium ($t\ge 2$) is
+\begin{align*}
+	Y_t&=A_tN_{t}  \\
+	\frac{W_t}{P_t}&= A_t  \\
+	\frac{W_t}{P_t}&=\frac{\chi N_t^\varphi}{C_t^{-\gamma}} \\
+	Y_t&=C_t \\
+	\frac{M_t}{P_t}&=\zeta^{1/\nu}\left(1-\frac{1}{Q_t}\right)^{-1/\nu}C_{t}^{\gamma/\nu}\\
+	1&=\beta E_t\left\{Q_t \frac{P_t}{P_{t+1}} \frac{C_{t+1}^{-\gamma}}{C_{t}^{-\gamma}}\right\} 
+\end{align*}
+
+\begin{enumerate}[(a)]
+	\item Are firms on their labor curve? Explain.
+	\item Are households on their labor supply curve? Explain.
+	\item How does the labor market clear?
+	\item Solve for the long-run steady state.
+	\item Does the Classical Dichotomy hold in the long-run? Explain.
+	\item Solve for output and the money market equilibrium in the short-run.
+	\item Does the Classical Dichotomy hold in the short-run? 
+	\item Explain intuitively (in words) how an increase in the money supply affects output in the short-run.
+	\item How does productivity affect output? Explain intuitively.
+	\item Derive the labor wedge. Is it procyclical or countercyclical?
+	\item What moments of the data would you use to discriminate between the predictions of the sticky price and the sticky wage model?
+\end{enumerate}
+
+
+
+\end{document}
