@@ -1,0 +1,476 @@
+\documentclass[english,xcolor=svgnames]{beamer}
+
+\input{../../../../Templates/Latex/teachingslidesbeamer.tex}
+
+
+% ===========================================================
+% ===========================================================
+% ===========================================================
+\begin{document}
+
+\title{Monopolistic Competition and Sticky Prices}
+\vspace{1cm}
+\author[shortname]{
+\begin{tabular}{c}
+	Johannes Wieland \\ 
+	\footnotesize \href{mailto:jfwieland@ucsd.edu}{jfwieland@ucsd.edu}  \\ 
+\end{tabular}
+}
+
+\date{Spring \the\year}
+
+\setbeamertemplate{footline}{}
+\makebeamertitle
+\setbeamertemplate{footline}[frame number]{}
+
+\addtocounter{framenumber}{-1}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\AtBeginSection[]{
+\setbeamertemplate{footline}{}
+  \frame<beamer>{ 
+
+    \frametitle{Outline}   
+
+    \tableofcontents[currentsection] 
+  }
+\setbeamertemplate{footline}[frame number]{}
+\addtocounter{framenumber}{-1}
+}
+
+\AtBeginSubsection[]{
+\setbeamertemplate{footline}{}
+  \frame<beamer>{ 
+
+    \frametitle{Outline}   
+
+    \tableofcontents[currentsection,currentsubsection] 
+  }
+  \setbeamertemplate{footline}[frame number]{}
+  \addtocounter{framenumber}{-1}
+}
+
+
+\section{Introduction}
+
+
+
+\begin{frame}
+\frametitle{Monopolistic Competition and Markups}
+\begin{itemize}
+	\item Goal: Add nominal rigidity for non-neutrality.
+	\item Problem: How does nominal rigidity work with CRS and
+perfect competition?
+	\begin{itemize}
+		\item Older literature: Rationing with output determined as minimum of supply and demand at given price.
+		\item Newer Literature: Get rid of CRS and perfect competition and replace with IRS and imperfect competition $\Rightarrow$ firms set prices.
+	\end{itemize}
+	\item But how do we have features of oligopoly without modeling the industrial organization, which is a mess in GE?
+	\item Blanchard and Kiyotaki (1987) and subsequent literature: Use monopolistic competition.
+	\begin{itemize}
+		\item Idea going back to Chamberlain (1933), but popularized by tractable setup of Dixit and Stiglitz (1977).
+	\item Monopolistic competition is widely used in GE modeling (macro, trade, labor, etc.) and is something you should know.
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+%\begin{frame}
+%\frametitle{Monopolistic Competition and Markups}
+%\begin{enumerate}[1.]
+%	\item Dixit-Stiglitz Preferences and Production
+%	\item Markups and Monopolistic Competition
+%	\item RBC With Monopolistic Competition: The Frictionless Benchmark
+%	\item One Period Nominal Rigidity
+%\end{enumerate}
+%\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Dixit-Stiglitz}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Monopolistic Competition}
+\begin{itemize}
+	\item Continuum of goods (``varieties'') $i\in [0, 1]$ with a monopolist for each good.
+	\item Each monopolist faces a downward-sloping demand curve.
+	\begin{itemize}
+		\item Substitution between goods imperfect due to ``love of variety.''
+	\end{itemize}
+	\item Each monopolist's optimal choice has an infinitesimal effect on economy-wide aggregates.
+	\begin{itemize}
+		\item Industrial organization in GE is simple.
+		\item Imperfect competition without game theory.
+	\end{itemize}
+	\item Today: demand curve from consumer preferences.
+	\item Can equivalently do firm optimization problem.
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Household Problem: Setup and Notation}
+\begin{itemize}
+\item Idea: CES over a continuum of goods:
+\begin{align*}
+	E_t \left\{\sum_{s=0}^{\infty}\beta^s\left(\frac{C_{t+s}^{1-\gamma}}{1-\gamma}+\zeta\frac{(M_{t+s}/P_{t+s})^{1-\nu}}{1-\nu}-\chi \frac{N_{t+s}^{1+\varphi}}{1+\varphi}\right)\right\}
+\end{align*}
+where
+\begin{align*}C_t=\left[\int_0^1C_t(i)^{\frac{\epsilon-1}{\epsilon}}di\right]^{\frac{\epsilon}{\epsilon-1}}\text{ with }\epsilon>0
+\end{align*}
+	\item Budget constraint:
+\begin{align*}
+		\int_0^1 P_t(i) C_{t}(i)di+B_t+M_t&\le Q_{t-1}B_{t-1}+M_{t-1}+W_t N_t \\& + P_{t}(TR_t+PR_t)
+	\end{align*}	
+	\item Ct is sometimes called a ``Dixit-Stiglitz aggregate.''
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Solving Dixit-Stiglitz: Two-Stage Budgeting}
+\begin{itemize}
+	\item Two-Stage Budgeting Theorem (Deaton and Muellbauer):
+\begin{itemize}
+	\item If upper stage is separable and lower stage is homothetic, can use two-stage budgeting with nested preferences.
+	\item[$\Rightarrow$] Solve the inner nest taking expenditure as given and outer nest by standard utility maximization given inner nest optimization to determine expenditure on bundle purchased in inner nest.
+	\end{itemize}
+%	\item Example:
+%	\begin{align*}
+%		U=C_t^\mu H_t^{1-\mu}\text{ where }C_t=\left[\int_0^1 C_t(i)^{\frac{\epsilon-1}{\epsilon}}di\right]^{\frac{\epsilon}{\epsilon-1}}
+%	\end{align*}
+%	\begin{itemize}
+%	\item CES is homothetic and C-D is separable (after taking logs).
+%	\item Cost minimize for $C_t(i)$ as a function of $C_t$ and then use C-D:
+%	\begin{align*}
+%		\mu=C_tP_{C,t}/Y_t\text{ and }1-\mu=H_tP_{H,t}/Y_t
+%	\end{align*}
+%	\end{itemize}
+	\item We can use two-stage budgeting here.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Dixit-Stiglitz: Inner Nest Maximization}
+\begin{align*}
+	\max \left[\int_0^1 C_t(i)^{\frac{\epsilon-1}{\epsilon}}di\right]^{\frac{\epsilon}{\epsilon-1}}-\lambda\left(\int_0^1 P_t(i) C_{t}(i)di-X_t\right)
+\end{align*}
+\begin{itemize}
+	\item Xt is expenditure on Dixit-Stiglitz goods.
+	\item FOC
+	\begin{align*}
+		C_t(i)^{-\frac{1}{\epsilon}}C_t^{\frac{1}{\epsilon}}=\lambda P_t(i)
+	\end{align*}
+	\item For any two goods i and j,
+	\begin{align*}
+		C_t(i)=C_t(j)\left(\frac{P_t(i)}{P_t(j)}\right)^{-\epsilon}=\frac{P_t(i)^{-\epsilon}}{P_t(j)^{1-\epsilon}}P_{t}(j)C_{t}(j)
+	\end{align*}
+	\item Bring the denominator over and integrate wrt j:
+	\begin{align*}
+		C_t(i)\int_0^1 P_t(j)^{1-\epsilon}dj&=P_t(i)^{-\epsilon}\int_0^1 P_{t}(j)C_{t}(j)dj \\
+		C_t(i)&=\frac{P_t(i)^{-\epsilon}}{\int_0^1 P_t(j)^{1-\epsilon}dj}X_t
+	\end{align*}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Dixit-Stiglitz: Price Index}
+\begin{itemize}
+	\item Indirect utility is:
+	\begin{align*}
+		v(P_t(k)|_{k=0}^{1},X_t) &= \left[\int_0^1 C_t(i)^{\frac{\epsilon-1}{\epsilon}}di\right]^{\frac{\epsilon}{\epsilon-1}}\\
+		&=\frac{X_t}{\left[\int_0^1 P_t(j)^{1-\epsilon}dj\right]^{\frac{1}{1-\epsilon}}}
+	\end{align*}
+	\item The cost of buying one unit of utility (=one unit of consumption) is:
+	\begin{align*}
+		P_t = \left[\int_0^1 P_t(j)^{1-\epsilon}dj\right]^{\frac{1}{1-\epsilon}}
+	\end{align*}
+	\begin{itemize}
+%			\item This is an ideal price index.
+			\item Index is geometric weighted average of individual good prices.
+		\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Dixit-Stiglitz: Demand Function}
+\begin{itemize}
+	\item $X_t=P_tC_t$, so plugging in price index gives
+	\begin{align*}C_t(i)&=\frac{P_t(i)^{-\epsilon}}{ P_t^{1-\epsilon}}X_t \\
+	&=\left(\frac{P_t(i)}{ P_t}\right)^{-\epsilon} C_t
+	\end{align*}
+	\item  CES structure delivers \emph{constant elasticity demand function}.
+	\begin{itemize}
+		\item Elasticity of demand is elasticity of substitution $\epsilon$.
+		\item As $\epsilon\rightarrow\infty$, perfect substitutes and demand perfectly elastic.
+		\item As $\epsilon\rightarrow 1$, less perfect substitutes and demand more inelastic (but still elastic as $\epsilon>1$).
+	\end{itemize}
+	\item Each firm has infinitesimal impact on $C_t$ and $P_t$ and treats them as exogenous.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Solving Dixit-Stiglitz: Upper Stage
+}
+\begin{itemize}
+	\item With this budget constraint can be written as:
+	\begin{align*}
+		P_t C_{t}+B_t+M_t&\le Q_{t-1}B_{t-1}+M_{t-1}+W_t N_t + P_{t}(TR_t+PR_t)
+	\end{align*}
+	\item Solve upper stage as normal with $C_t$ as Dixit-Stiglitz aggregate:
+	\begin{align*}
+	\frac{W_t}{P_t}&=\frac{\chi N_t^\varphi}{C_t^{-\gamma}} \\
+		1&=\beta E_t\left\{Q_t \frac{P_t}{P_{t+1}} \frac{C_{t+1}^{-\gamma}}{C_{t}^{-\gamma}}\right\}=E_t\{\Lambda_{t,t+1}R_{t+1}\} \\
+		1&=\beta E_t\left\{\frac{P_t}{P_{t+1}} \frac{C_{t+1}^{-\gamma}}{C_{t}^{-\gamma}}\right\}+\zeta\frac{(M_t/P_t)^{-\nu}}{C_{t}^{-\gamma}}
+	\end{align*}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Uses of Dixit-Stiglitz
+}
+\begin{itemize}
+	\item Dixit-Stiglitz is frequently used in GE modeling both in macro and other subfields.
+	\begin{itemize}
+		\item Often along with free entry margin that drives profits to zero and endogenously determines number of products.
+	\end{itemize}
+	\item Noteworthy Examples:
+	\begin{itemize}
+		\item ``New'' Trade Theory (Krugman, 1980): Love of variety explains high volume of intra-industry trade, e.g. Japan exports Lexus to Germany and Germany exports Mercedes to Japan.
+		\item New Economic Geography (Krugman, 1990): Urbanization determined by balance between dispersion forces (e.g., housing supply) and agglomeration forces created by increasing returns. As trade costs fall, cities should develop.
+		\item Endogenous Growth Theory (Romer, 1990): Profits give entrepreneurs incentives to invest in creating new products. Growth through endogenously expanding product variety.
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Dixit-Stiglitz Production
+}
+\begin{itemize}
+	\item Dixit-Stiglitz is used two ways:
+\begin{itemize}
+	\item Preferences: Households consume each good $i$,
+CES preferences over continuum of goods.
+	\item Production: Households consume final good assembled from
+intermediates $i$, CES production fn over continuum of goods.
+\end{itemize}
+	\item These are essentially equivalent.
+	\begin{itemize}
+	\item We used utility maximization given to expenditure $X_t$, but same as cost minimization (duality theory).
+	\item Cost min s.t. D-S utility level $C_t$ mathematically equivalent to profit max s.t. CES production is $C_t$ (up to sign change).
+	\item Intuition: Does not matter where continuum is as long as it as CES structure.
+\end{itemize}
+\item Gali book presents model using Dixit-Stiglitz preferences. I will follow this convention here.
+%\item I will use Dixit-Stiglitz production.
+\end{itemize}
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Monopolistic Competition and Sticky Prices}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Intermediate Good Producers}
+\begin{itemize}
+	\item From the household problem, each monopolist faces a downward-sloping demand curve:
+	\begin{align*}
+		C_t(i)&=\left(\frac{P_t(i)}{ P_t}\right)^{-\epsilon} C_t
+	\end{align*} 
+	\item Produce variety CRS with labor:
+	\begin{align*}
+		Y_t(i)=A_t N_t(i)
+	\end{align*}
+	\begin{itemize}
+		\item See Gali for DRS.
+	\end{itemize}
+	\item Market clearing implies $C_t(i)=Y_t(i)$ and $C_t=Y_t$.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Profit Maximization with Flexible Prices}
+\begin{itemize}
+	\item Profits for the monopolist are
+	\begin{align*}
+		PR_t(i)&=\frac{P_t(i)}{P_t}Y_t(i) - \frac{W_t}{P_t}N_t(i)  \\
+		&= \left(\frac{P_t(i)}{ P_t}\right)^{1-\epsilon}Y_t -\frac{W_t}{P_t}  \left(\frac{P_t(i)}{ P_t}\right)^{-\epsilon}  \frac{Y_t}{A_t}
+	\end{align*}
+	\item FOC for $P_t(i)$:
+	\begin{align*}
+		(1-\epsilon)\left(\frac{P_t^*(i)}{ P_t}\right)^{-\epsilon}Y_t + \epsilon\frac{W_t}{P_t}  \left(\frac{P_t^*(i)}{ P_t}\right)^{-\epsilon-1}  \frac{Y_t}{A_t} = 0
+	\end{align*}
+	\item The optimal real price is:
+	\begin{align*}
+		\frac{P_t^*(i)}{ P_t} = \underbrace{\mu}_{\text{Mark-up}} \times \underbrace{\frac{W_t}{P_t}\frac{1}{A_t}}_{\text{Real MC}},\qquad \mu = \frac{\epsilon}{\epsilon-1}
+	\end{align*}
+	\begin{itemize}
+		\item Real price is a multiplicative markup over real marginal cost.
+	\end{itemize}
+%	\item Real price is a multiplicative markup over marginal cost.
+%	\begin{itemize}
+%		\item Markup is inversely related to elasticity of demand.
+%		\item Monopolist always on elastic portion of demand curve.
+%	\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Classical Dichotomy}
+\begin{itemize}
+	\item Monopolistic competition by itself does not deliver monetary non-neutrality.
+	\item Labor demand equation becomes
+	\begin{align*}
+		 \frac{W_t}{P_t} = \underbrace{\frac{1}{\mu}}_{\text{Inverse of Mark-up}} \times \underbrace{A_t}_{MPL_t}
+	\end{align*}
+	\item This is the only change $\Rightarrow$ Classical Dichotomy holds.
+	\item To get non-neutrality of money need nominal rigidity.
+	\begin{itemize}
+		\item Monopolistic competition gives an identity to the price setter. We can study what happens when firms keep prices fixed.
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Intermediate Good Producers: Calvo Assumption}
+\begin{itemize}
+	\item Calvo (1983) pricing assumption: Each firm resets price each period with iid probability $1 - \theta$.
+	\begin{itemize}
+		\item By LLN, fraction that reset is $1 - \theta$ and fraction constant is $\theta$.
+		\item Average price duration follows geometric dist with mean
+duration $\frac{1}{1-\theta}$.
+	\end{itemize}
+	\item Firms that adjust prices choose $P_t(i), Y_t(i), N_t(i)$ to maximize expected discounted profits and demand.
+	\item Firms that do not adjust prices set output to meet demand.
+%	 as long as Pt (i) > MCtn (i) (nominal MC).
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Intermediate Good Producers: Calvo Assumption}
+\begin{itemize}
+	\item Calvo is a strong assumption!
+	\item Is the world Calvo?
+	\begin{itemize}
+			\item Literally, no.
+			\item But it could be a decent approximation.
+	\end{itemize}
+	\item Literature on ``menu cost'' models where there is an inaction region due to fixed cost of changing price.
+	\begin{itemize}
+		\item Initial literature: Much more flexible than Calvo, since firms that have price furthest from MC change price.
+		\item Recent literature: To match micro-pricing facts, need large and infrequent firm-level MC shocks, which looks close to Calvo.
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Price Dynamics With Calvo}
+\begin{itemize}
+	\item A fraction $1-\theta$ of firms adjust to $P_t^*$ and fraction $\theta$ keep $P_{t-1}(i)$:
+	\begin{align*}P_t&=\left[\int_0^1 P_t(i)^{1-\epsilon}di\right]^{\frac{1}{1-\epsilon}}\\
+		&=\left[\theta \int_0^1 P_{t-1}(i)^{1-\epsilon}di + (1-\theta)\int_0^1 P_{t}^{*1-\epsilon}di\right]^{\frac{1}{1-\epsilon}} \\
+		&=\left[\theta \left(\int_0^1 P_{t-1}(i)^{1-\epsilon}di\right)^{\frac{1-\epsilon}{1-\epsilon}} + (1-\theta)\int_0^1 P_{t}^{*1-\epsilon}di\right]^{\frac{1}{1-\epsilon}}\\
+		&=\left[\theta P_{t-1}^{1-\epsilon} + (1-\theta) P_{t}^{*1-\epsilon}\right]^{\frac{1}{1-\epsilon}}
+	\end{align*}
+	\item Price index $P_t$ is geometric average of $P_{t-1}$ and $P_t^*$.
+	\item Calvo is tractable because we do not need to keep track of distribution of prices.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Inflation Dynamics With Calvo
+}
+\begin{itemize}
+	\item Divide by $P_{t-1}$ to get inflation between $t-1$ and $t$, $\Pi_t$ 
+	\begin{align*}\Pi_t =\frac{P_t}{P_{t-1}}=\left[\theta  + (1-\theta) \left(\frac{P_{t}^{*}}{P_{t-1}}\right)^{1-\epsilon}\right]^{\frac{1}{1-\epsilon}}
+	\end{align*}
+	\item From this, we can see that Calvo price setting implies a partial adjustment mechanism:
+	\begin{itemize}
+		\item If $P_t^*=P_{t-1}$, then $\Pi_t=1$.
+		\item If $P_t^*>P_{t-1}$, then $\Pi_t>1$ and $P_t^*>P_t> P_{t-1}$.
+	\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Optimal Intermediate Reset Price Setting
+}
+\begin{align*}
+	\max_{P_{t}^*,\{Y_{t+s|t}\}_{s=0}^{\infty}}E_t &\left\{\sum_{s=0}^{\infty}\theta^s\Lambda_{t,t+s}\left(\frac{P_t^*Y_{t+s|t}}{P_{t+s}} -TC_{t+s}(Y_{t+s|t})\right)\right\}\\
+	&Y_{t+s|t}=\left(\frac{P_t^*}{P_{t+s}}\right)^{-\epsilon} Y_{t+s}
+\end{align*}
+\begin{itemize}
+	\item The intermediate producer maximizes real discounted profits.
+	\begin{itemize}
+		\item Also discounting by prob they keep price same $\theta$.
+	\end{itemize}
+	\item Real Profits are:
+	\begin{itemize}
+		\item Nominal revenue  deflated by the price level, $\frac{P_t^*Y_{t+s|t}}{P_{t+s}}$, minus total real cost $TC_{t+s}(Y_{t+s|t})$.
+		\item Output at time $t+s$, $Y_{t+s|t}$ is determined by the demand curve at time $t+s$ and the price chosen at time $t$.
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Optimal Intermediate Reset Price Setting
+}
+\begin{align*}
+	E_t \left\{\sum_{s=0}^{\infty}\theta^s\Lambda_{t,t+s}Y_{t+s|t}\left(\frac{P_t^*}{P_{t+s}} - (1+\mu) MC_{t+s}(Y_{t+s|t})\right)\right\}&=0
+\end{align*}
+\begin{itemize}
+	\item If $\theta=0$, no stickiness and this collapses to flex price model:
+	\begin{align*}
+		P_t^* = (1+\mu) P_{t}MC_{t}
+	\end{align*}
+	\item If $\theta>0$, then the optimal reset price is a markup over a weighted average of expected future marginal costs:
+	\begin{align*}
+		P_t^* &=  (1+\mu)E_t\left\{\sum_{s=0}^{\infty}\omega_{t,t+s}P_{t+s}MC_{t+s|t}\right\} \\
+		\text{where }&\omega_{t,t+s}=\frac{\theta^s\Lambda_{t,t+s}Y_{t+s}P_{t+s}^{\epsilon-1}}{\sum_{k=0}^{\infty}\theta^k\Lambda_{t,t+k}Y_{t+k}P_{t+k}^{\epsilon-1}}
+	\end{align*}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Completing the Model
+}
+\begin{itemize}
+	\item Because of CRS, real marginal cost is:
+	\begin{align*}
+		MC_{t+s|t}=\frac{W_{t+s}/P_{t+s}}{Y_{t+s|t}/N_{t+s|t}}=\frac{W_{t+s}/P_{t+s}}{A_{t+s}}=MC_{t+s}
+	\end{align*}
+	\item Aggregate output is:
+	\begin{align*}
+Y_t=\left[\int_0^1[A_tN_t(i)]^{\frac{\epsilon-1}{\epsilon}}di\right]^{\frac{\epsilon}{\epsilon-1}}=A_tN_t\left[\int_0^1\left(\frac{N_t(i)}{N_t}\right)^{\frac{\epsilon-1}{\epsilon}}di\right]^{\frac{\epsilon}{\epsilon-1}}
+	\end{align*}
+\begin{itemize}
+	\item Term in brackets is loss in output due to misallocation caused by price dispersion.
+	\item Creates welfare costs of inflation, but it is second order and drops out of log-linearization.
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\section{Next Steps}
+
+\begin{frame}
+\frametitle{Completing the Model
+}
+\begin{itemize}
+	\item Combine price setting ``block'' with household ``block'' and monetary policy ``block'' to arrive at the new Keynesian model.
+\end{itemize}
+\end{frame}
+
+
+\end{document}
