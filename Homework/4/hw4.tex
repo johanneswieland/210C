@@ -1,0 +1,154 @@
+
+
+\documentclass{article}
+
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage[comma,authoryear]{natbib}
+\usepackage{theorem}
+\usepackage[onehalfspacing]{setspace}
+\usepackage{indentfirst}
+\usepackage{float}
+\usepackage{geometry}
+\usepackage{enumerate}
+\usepackage{textcomp}
+
+
+\usepackage{tikz}
+\usetikzlibrary{intersections,calc}
+
+\usepackage{mathabx}
+
+\usepackage{url}
+
+\setcounter{MaxMatrixCols}{10}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{acknowledgement}{Acknowledgement}
+\newtheorem{algorithm}{Algorithm}
+\newtheorem{axiom}{Assumption}
+\newtheorem{case}{Case}
+\newtheorem{claim}{Claim}
+\newtheorem{conclusion}{Conclusion}
+\newtheorem{condition}{Condition}
+\newtheorem{conjecture}{Conjecture}
+\newtheorem{corollary}{Corollary}
+\newtheorem{criterion}{Criterion}
+{\theorembodyfont{\rmfamily}
+\newtheorem{definition}{Definition}
+}
+\newtheorem{example}{Example}
+\newtheorem{exercise}{Exercise}
+\newtheorem{lemma}{Lemma}
+\newtheorem{notation}{Notation}
+\newtheorem{problem}{Problem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{remark}{Remark}
+\newtheorem{solution}{Solution}
+\newtheorem{summary}{Summary}
+\newenvironment{proof}[1][Proof]{\noindent\textbf{#1.} }{\ \rule{0.5em}{0.5em}}
+\geometry{left=1in,right=1in,top=1in,bottom=1in} 
+
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\X}{\mathbb{X}}
+\newcommand{\1}{\mathbf{1}}
+
+\newcommand{\suchthat}{\;\ifnum\currentgrouptype=16 \middle\fi|\;}
+
+\newcommand\invisiblesection[1]{%
+  \refstepcounter{section}%
+  \addcontentsline{toc}{section}{\protect\numberline{\thesection}#1}%
+  \sectionmark{#1}}
+
+\def\citeapos#1{\citeauthor{#1}'s (\citeyear{#1})}
+
+\begin{document}
+
+\title{Econ 210C Homework 4}
+\author{Instructor: Johannes Wieland}
+\date{\color{red} Due: 06/5/2024, 11:59PM PST. Submit pdf write-up and zipped code packet on Github.}
+\maketitle
+
+\section*{1. Productivity Shocks in the Three Equation Model}
+The log-linearized NK model boils down to three equations:
+	\begin{align*}
+		\hat{y}_t &=-\sigma[\hat{i}_t-E_t\{\hat{\pi}_{t+1}\}]+E_t\{\hat{y}_{t+1}\} \\
+		\hat{\pi}_t&=\kappa (\hat{y}_t-\hat{y}_t^{flex}) +\beta E_t \{\hat{\pi}_{t+1}\} \\
+		\hat{i}_t&=\phi_\pi\hat{\pi}_t+v_t 
+	\end{align*}
+with $\hat{y}_t^{flex}=\frac{1+\varphi}{\gamma+\varphi}\hat{a}_t$.
+	
+For this part assume that $v_t=0$ and that $\hat{a}_t = \rho_a \hat{a}_{t-1} + \epsilon_t$.
+
+\begin{enumerate}[(a)]
+	\item Using the method of undetermined coefficients, solve for $\hat{y}_t$ and $\hat{\pi}_t$ as a function of $\hat{a}_t$.
+	\item Plot the impulse response function for $\hat{y}_t, \hat{\pi}_t,\hat{y}_t^{flex},\hat{y}_t-\hat{y}_t^{flex},\hat{i}_t,\E_t\hat{r}_{t+1},\hat{n}_{t},\hat{a}_t$ to a one unit shock to $\hat{a}_t$. Use the following parameter values:
+	
+	$\beta=0.99,\sigma=1,\kappa=0.1,\rho_a=0.8,\phi_\pi=1.5$
+	\item Intuitively explain your results.
+	\item Use the Jupyter notebook "newkeynesianlinear.ipynb" to check that your plots in (b) are correct.
+%	\item Modifying the same notebook, plot the IRFs for $\kappa\in\{0.001,1,1000\}$. Intuitively explain your results.
+\end{enumerate}
+
+\section*{2. Non-linear NK model in Jupyter}
+Implement the standard new Keynesian model in Jupyter. We will write all conditions recursively and let the Sequence-Space Jacobian (SSJ) routines do the differentiation for us. Note that the first order conditions for firms and households are exactly as we have written in the lectures.
+%In particular, the firm's production function is now $Y_t(i)=A_t N_{t}(i)^{1-\alpha}$. Note that the household problem is unchanged, so you can directly take their FOC from the lecture slides.
+\begin{enumerate}[(a)]
+	\item The real reset price equation for the firm is,
+	\begin{align*}
+		p_t^*\equiv\frac{P_t^*}{P_{t}} &=  (1+\mu)E_t\left\{\sum_{s=0}^{\infty}\frac{\theta^s\Lambda_{t,t+s}Y_{t+s}(P_{t+s}/P_t)^{\epsilon-1}}{\sum_{k=0}^{\infty}\theta^k\Lambda_{t,t+k}Y_{t+k}(P_{t+k}/P_t)^{\epsilon-1}}\frac{W_{t+s}/P_{t}}{A_{t+s}}\right\}
+	\end{align*}
+	Explain why this expression is not recursive.
+	\item We next show that we can write $B_t=E_t(F_{1t}/F_{2t})$, where both $F_{1t},F_{2t}$ are recursive. First, show that the denominator can be recursively written as,
+	\begin{align*}
+		F_{2t}&\equiv \sum_{k=0}^{\infty}\theta^k\Lambda_{t,t+k}Y_{t+k}(P_{t+k}/P_t)^{\epsilon-1} \\
+%		&=Y_t+\sum_{k=1}^{\infty}\theta^k\Lambda_{t,t+k}Y_{t+k}(P_{t+k}/P_t)^{\epsilon-1} \\
+%		&=Y_t+\left(\frac{P_{t+1}}{P_t}\right)^{\epsilon-1}\sum_{k=1}^{\infty}\theta^k\Lambda_{t,t+k}Y_{t+k}(P_{t+k}/P_{t+1})^{\epsilon-1} \\
+%		&=Y_t+\left(\frac{P_{t+1}}{P_t}\right)^{\epsilon-1}\beta\theta\frac{C_{t}}{C_{t+1}}\sum_{k=1}^{\infty}\theta^{k-1}\Lambda_{t+1,t+k}Y_{t+k}(P_{t+k}/P_{t+1})^{\epsilon-1} \\
+		&=Y_t+\theta\Pi_{t+1}^{\epsilon-1}\Lambda_{t,t+1}F_{2,t+1}
+	\end{align*}
+	noting that $\Lambda_{t,t+k}=\Lambda_{t,t+1}\Lambda_{t+1,t+k}$ for all $k\ge 1$.
+	\item Second, show that the numerator can be recursively written as,
+	\begin{align*}
+		F_{1t}&\equiv (1+\mu)\sum_{s=0}^{\infty}\theta^s\Lambda_{t,t+s}Y_{t+s}(P_{t+s}/P_t)^{\epsilon-1}\frac{W_{t+s}/P_{t}}{A_{t+s}}  \\
+%		&=(1+\mu)Y_t\frac{W_{t}/P_{t}}{A_{t}} + (1+\mu)\sum_{s=1}^{\infty}\theta^s\Lambda_{t,t+s}Y_{t+s}(P_{t+s}/P_t)^{\epsilon-1}\frac{W_{t+s}/P_{t}}{A_{t+s}}   \\
+%		&=(1+\mu)Y_t\frac{W_{t}/P_{t}}{A_{t}} + (1+\mu)\left(\frac{P_{t+1}}{P_t}\right)^{\epsilon}\beta\frac{C_{t}}{C_{t+1}}\sum_{s=1}^{\infty}\theta^s\Lambda_{t+1,t+s}Y_{t+s}(P_{t+s}/P_{t+1})^{\epsilon-1}\frac{W_{t+s}/P_{t+1}}{A_{t+s}}   \\
+%		&=(1+\mu)Y_t\frac{W_{t}/P_{t}}{A_{t}}+(1+\mu)\theta\beta\frac{C_{t}}{C_{t+1}}\left(\Pi_{t+1}\right)^{\epsilon}\sum_{k=1}^{\infty}\theta^{k-1}\Lambda_{t+1,t+k}Y_{t+k}(P_{t+k}/P_{t+1})^{\epsilon-1} \\
+		&=(1+\mu)Y_t\frac{W_{t}/P_{t}}{A_{t}}+\theta\Pi_{t+1}^{\epsilon}\Lambda_{t,t+k}F_{1,t+1}
+	\end{align*}
+	noting that $\Lambda_{t,t+k}\Lambda_{t,t+1}\Lambda_{t+1,t+k}$ for all $k\ge 1$.
+	\item Show that (gross) inflation can implicitly be written as
+	\begin{align*}
+%		P_t&=\left[\theta P_{t-1}^{1-\epsilon} + (1-\theta) P_{t}^{*1-\epsilon}\right]^{\frac{1}{1-\epsilon}} \\
+%		1&=\left[\theta \left(\frac{P_{t-1}}{P_t}\right)^{1-\epsilon} + (1-\theta) B_{t}^{1-\epsilon}\right]^{\frac{1}{1-\epsilon}} \\
+		1&=\theta \Pi_{t}^{\epsilon-1} + (1-\theta) p_{t}^{*1-\epsilon}
+	\end{align*}
+	\item Explain intuitively how when $p_t^*>1$, then $\Pi_t>1$.
+	\item Implement the non-linear NK using your recursive equations in Python using the Sequence Space Jacobian toolbox. For now, ignore the dispersion of labor in production and write the aggregate production function as $Y_t=A_tN_t$. Use the following parameters: $\beta=0.99,\gamma=1,\varphi=1,\chi=1,\epsilon=10,\rho_a=0.8,\phi_\pi=1.5,\phi_y=0$ where $A_t=(A_{t-1})^{\rho_a}e^{\epsilon_t^a}$. Productivity is the only shock. Price stickiness is specified below.
+	\item Compute IRFs for $\theta\in\{0.0001,0.25,0.5,0.75,0.9999\}$ using a first order approximation to your non-linear equations.
+	
+	Report the IRFs for consumption, the output gap, the level of output, employment, inflation, the mark-up, the nominal interest rate, and the ex-ante real interest rate. Your graph for each variable should contain all cases for $\theta$, appropriately labelled. 
+	\item Intuitively explain how the impulse response functions depend on the value of $\theta$.
+%	\item Repeat your calculations for $\theta=0$ and plot the IRFs. (Again, all cases of $\rho_a$ on one graph.) Intuitively explain your results.
+	\item What would you expect to see from the same shock in an RBC model without capital? (No derivation should be necessary.)
+\end{enumerate}
+
+
+\section*{3. (Optional) Price Dispersion}
+Answering this question is optional.\\
+In question 2, we ignored the labor dispersion term, $\Delta_t = \left[\int_0^1 \left(\frac{N_t(i)}{N_t}\right)^{\frac{\epsilon-1}{\epsilon}}\right]^{\frac{\epsilon}{\epsilon-1}}$. In this question you will walk through the steps of writing price dispersion recursively and incorporating it in your model.
+\begin{enumerate}[(a)]
+	\item Use the firm's demand curve to write labor dispersion in terms of relative firm prices $P_t(i)/P_t$.
+	\item Note that everyone resetting prices at time $t$ sets the same price $P_t^*$. Write $\Delta_t $ in terms of $P_t^*$ and $P_{t-1}(i)/P_t = \frac{P_{t-1}(i)}{P_{t-1}\Pi_t}$.
+	\item Finally, use $\Delta_{t-1} $ to substitute out for the integral over $P_{t-1}(i)/P_{t-1}$.
+	\item Explain why the expression you derived is recursive.
+	\item Add the recursive expression to your Python code in question 2, with the production function now equal to $Y_t = A_t N_t^{1-\alpha}\Delta_t $. One a single graph, plot the IRF for a technology shock in the model with price dispersion and the model without price dispersion. (Use the baseline parameters only with $\theta=0.75$.)
+	\item Interpret your results from the previous part. 
+\end{enumerate}
+
+
+\end{document}
