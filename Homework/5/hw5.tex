@@ -114,15 +114,15 @@ Consider the standard new Keynesian model
 Implement the linearized new Keynesian model in a Jupyter notebook. 
 \begin{align*}
 	\tilde{y}_t &=-\sigma\left(\hat{i}_t-E_t\{\hat{\pi}_{t+1}\}\right)+E_t\{\tilde{y}_{t+1}\} \\
-	\hat{\pi}_t&=\kappa \tilde{y}_{t} +\beta E_t \{\hat{\pi}_{t+1}\} + \hat{u}_t \\
-	\hat{i}_t&= \phi_\pi\hat{\pi}_t + \bar{i}_t \\
+	\hat{\pi}_t&= \beta E_t \{\hat{\pi}_{t+1}\}+ \kappa \hat{y}_{t} + \hat{u}_t \\
+	\hat{i}_t&= \phi_\pi\hat{\pi}_t+ \bar{i}_t \\
 	\bar{i}_t&=\rho_i \bar{i}_{t-1}+\epsilon^i_t \\
 	\hat{u}_{t}&=\rho_u \hat{u}_{t-1}+\epsilon^u_t 
 \end{align*}
 Parameters: $\sigma=1,\kappa=0.03,\beta=0.99, \rho_i = 0.8,\rho_u=0.8$, and use the interest rate rule parameters you estimated in the previous question. Set the standard deviation of the monetary shock to 0.1 and that of the cost-push shock to 0.01.
 \begin{enumerate}[(a)]
 	\item Plot the IRFs. 
-	\item Intuitively explain how the shocks $\epsilon^r_t$ and $\epsilon^i_t$ affect $\tilde{y}_t,\tilde{\pi}_t,\hat{i}_t$.
+	\item Intuitively explain how the shocks $\epsilon^r_t$ and $\epsilon^i_t$ affect $\hat{y}_t,\tilde{\pi}_t,\hat{i}_t$.
 	\item Simulate a time series of length 1000 and plot it.
 	\item Estimate the interest rate rule on your simulated data.
 	\item Explain why this procedure does not recovery the true parameters.
