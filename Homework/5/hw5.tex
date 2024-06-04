@@ -1,0 +1,158 @@
+
+
+\documentclass{article}
+
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage[comma,authoryear]{natbib}
+\usepackage{theorem}
+\usepackage[onehalfspacing]{setspace}
+\usepackage{indentfirst}
+\usepackage{float}
+\usepackage{geometry}
+\usepackage{enumerate}
+\usepackage{textcomp}
+
+
+\usepackage{tikz}
+\usetikzlibrary{intersections,calc}
+
+\usepackage{mathabx}
+
+\usepackage{url}
+
+\setcounter{MaxMatrixCols}{10}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{acknowledgement}{Acknowledgement}
+\newtheorem{algorithm}{Algorithm}
+\newtheorem{axiom}{Assumption}
+\newtheorem{case}{Case}
+\newtheorem{claim}{Claim}
+\newtheorem{conclusion}{Conclusion}
+\newtheorem{condition}{Condition}
+\newtheorem{conjecture}{Conjecture}
+\newtheorem{corollary}{Corollary}
+\newtheorem{criterion}{Criterion}
+{\theorembodyfont{\rmfamily}
+\newtheorem{definition}{Definition}
+}
+\newtheorem{example}{Example}
+\newtheorem{exercise}{Exercise}
+\newtheorem{lemma}{Lemma}
+\newtheorem{notation}{Notation}
+\newtheorem{problem}{Problem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{remark}{Remark}
+\newtheorem{solution}{Solution}
+\newtheorem{summary}{Summary}
+\newenvironment{proof}[1][Proof]{\noindent\textbf{#1.} }{\ \rule{0.5em}{0.5em}}
+\geometry{left=1in,right=1in,top=1in,bottom=1in} 
+
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\X}{\mathbb{X}}
+\newcommand{\1}{\mathbf{1}}
+
+\newcommand{\suchthat}{\;\ifnum\currentgrouptype=16 \middle\fi|\;}
+
+\newcommand\invisiblesection[1]{%
+  \refstepcounter{section}%
+  \addcontentsline{toc}{section}{\protect\numberline{\thesection}#1}%
+  \sectionmark{#1}}
+
+\def\citeapos#1{\citeauthor{#1}'s (\citeyear{#1})}
+
+\begin{document}
+
+\title{Econ 210C Homework 5}
+\author{Instructor: Johannes Wieland}
+\date{\color{red} Due: no due date.}
+\maketitle
+
+
+%\section*{1. Sticky-Information Model}
+%Gali, Exercise 3.6
+
+\section*{1. Cost-push shocks}
+Consider the standard new Keynesian model
+\begin{align}
+	\hat{y}_{t}&=E_{t}\hat{y}_{t+1} - E_{t}(\hat{i}_{t}-\hat{\pi}_{t+1}) \label{nk1} \\
+	\hat{\pi}_{t}&=\beta E_{t}\hat{\pi}_{t+1} +\kappa (\hat{y}_{t}-\hat{y}_{t}^{eff}) + u_t \label{nk2} \\
+	\hat{i}_{t}&=\phi_\pi \hat{\pi}_t,\qquad \phi_\pi>1 \label{nk3}
+\end{align}
+\begin{enumerate}[(a)]
+\item Interpret each of the equations \eqref{nk1}-\eqref{nk3} (max 2 sentence each).
+\item Assume $\hat{a}_{t}=0$ and $u_{t}=\rho_u u_{t-1}+\epsilon_t^u$ with $\epsilon_t^u\sim N(0,\sigma^2_{\epsilon^u})$. Solve for the equilibrium levels of $\hat{y}_t$, $\hat{y}_t-\hat{y}_t^{eff}$, $\hat{\pi}_t$, $\hat{i}_t$, and $\hat{r}_{t}=\hat{i}_t-E_t\hat{\pi}_{t+1}$ as a function of $u_t$.
+\item Modify the Jupyter notebook ``newkeynesianlinear.ipynb'' to verify that your solution in (b) are correct.
+\item Explain intuitively how a supply shock affects the output gap, inflation, the nominal interest rate, and the real interest rate. (4 sentences should suffice.)
+\item Use your solution to express the loss function $L=\vartheta var(\hat{y}_{t}-\hat{y}_{t}^{eff})+var(\hat{\pi}_t)$ as a function of the model parameters, where $var(\hat{y}_{t}-\hat{y}_{t}^{eff})$ is the variance of the output gap and $var(\hat{\pi}_t)$ is the variance of inflation.
+\item Show that the optimal interest rate rule satisfies $\phi_\pi=\rho_u + \frac{\kappa (1-\rho_u)}{\vartheta(1-\beta\rho_u)}$.
+\item Using the optimal $\phi_\pi$, show that $\hat{y}_{t}-\hat{y}_{t}^{eff}=-\frac{\kappa}{\vartheta(1-\beta\rho_u)}\hat{\pi}_t$.
+\item The optimal monetary policy under discretion is $\hat{y}_{t}-\hat{y}_{t}^{eff}=-\frac{\kappa}{\vartheta}\hat{\pi}_t$. Does the optimal $\phi_\pi$ deliver a better, a worse, or the same loss? Explain intuitively. (No derivation should be necessary.)
+%\item Does the optimal $\phi_\pi$ deliver a better, a worse, or the same loss than optimal monetary policy under commitment ($\hat{x}_t-\hat{x}_{t-1}=\frac{\kappa}{\vartheta}\hat{\pi}_t$)? Explain intuitively. (No derivation should be necessary.)
+\end{enumerate}
+
+\section*{2. Estimating an Interest Rate Rule}
+\begin{enumerate}[(a)]
+	\item Download quarterly data from Fred for CPI inflation rate, the output gap, and the Federal Funds Rate from 1985Q1 to 2007Q4. Plot each data series.
+	\item Estimate the Interest Rate Rule via OLS:
+	\begin{align*}
+		i_{t} = \alpha + \rho_i i_{t-1} + \phi_{\pi}\pi_{t} + \phi_{y}\tilde{y}_t + v_t
+	\end{align*}
+	and report your estimates.
+	\item Explain why the OLS estimates are likely biased. 
+	\item In which direction does the bias go?
+%	\item (Optional) Describe a feasible procedure that addresses the identification problem and implement it. Contrast your estimates with the OLS estimates.
+\end{enumerate}
+
+
+\section*{3. Estimating an Interest Rate Rule in the NK model}
+Implement the linearized new Keynesian model in a Jupyter notebook. 
+\begin{align*}
+	\tilde{y}_t &=-\sigma\left(\hat{i}_t-E_t\{\hat{\pi}_{t+1}\}\right)+E_t\{\tilde{y}_{t+1}\} \\
+	\hat{\pi}_t&=\kappa \tilde{y}_{t} +\beta E_t \{\hat{\pi}_{t+1}\} + \hat{u}_t \\
+	\hat{i}_t&= \phi_\pi\hat{\pi}_t + \bar{i}_t \\
+	\bar{i}_t&=\rho_i \bar{i}_{t-1}+\epsilon^i_t \\
+	\hat{u}_{t}&=\rho_u \hat{u}_{t-1}+\epsilon^u_t 
+\end{align*}
+Parameters: $\sigma=1,\kappa=0.03,\beta=0.99, \rho_i = 0.8,\rho_u=0.8$, and use the interest rate rule parameters you estimated in the previous question. Set the standard deviation of the monetary shock to 0.1 and that of the cost-push shock to 0.01.
+\begin{enumerate}[(a)]
+	\item Plot the IRFs. 
+	\item Intuitively explain how the shocks $\epsilon^r_t$ and $\epsilon^i_t$ affect $\tilde{y}_t,\tilde{\pi}_t,\hat{i}_t$.
+	\item Simulate a time series of length 1000 and plot it.
+	\item Estimate the interest rate rule on your simulated data.
+	\item Explain why this procedure does not recovery the true parameters.
+	\item Would you be able to identify the true parameters using a Cholesky decomposition? Explain why or why not.
+	\item What data do you need to identify the parameters of the interest rate rule?
+	\item Implement your proposed approach and show that it correctly recovers $\phi_\pi$ in the model.
+	\item Suppose the true interest rate rule was $\hat{i}_t= \phi_\pi\hat{\pi}_t + \phi_y\hat{y}_t + \epsilon^i_t$. Would you be able to identify both $\phi_\pi$ and $\phi_y$ using your procedure? Explain.
+%	\item\label{sigma} Using your data from part 2, compute the standard deviation of the output gap and inflation over 1985Q1 to 2007Q4. In the model find the standard deviations of $\epsilon^r_t$ and $\epsilon^u_t$, that exactly replicate the standard deviations in the data. (Note: inflation in the model is not annualized---make sure your data counterpart is also not annualized.)
+%	\item The loss function is
+%	\begin{align*}
+%		L_t = \frac{1}{2(1-\beta)}[var(\hat{\pi}_t)+\vartheta\ var(\tilde{y}_t)]
+%	\end{align*}
+%	Compute the loss under this loss function with $\vartheta=\kappa/\epsilon$ where the elasticity of substitution across varieties is $\epsilon=10$.
+%	\item Replace the interest rate rule with the optimal discretionary policy. Compute and plot the IRFs. (You should keep the same $\sigma^r$ and $\sigma^u$ from part \ref{sigma}.)
+%%	\item Intuitively explain how the shocks $\epsilon^r_t$ and $\epsilon^u_t$ affect $\tilde{y}_t,\tilde{\pi}_t,\hat{i}_t$ under the optimal discretionary policy.
+%	\item Compute the loss under the optimal discretionary policy.
+%	\item Replace the interest rate rule with the optimal commitment policy. Compute and plot the IRFs. (You should keep the same $\sigma^r$ and $\sigma^u$ from part \ref{sigma}.)
+%%	\item Intuitively explain how the shocks $\epsilon^r_t$ and $\epsilon^u_t$ affect $\tilde{y}_t,\tilde{\pi}_t,\hat{i}_t$ under the optimal commitment policy.
+%	\item Compute the loss under the optimal commitment policy.
+%	\item Compare the losses under the interest rate rule, the optimal discretionary policy, and the optimal commitment policy. Interpret your findings.
+\end{enumerate}
+
+%\section*{2. Optimal Interest Rate Rule}
+%Gali, Exercise 5.1
+
+
+
+
+
+
+
+
+\end{document}
