@@ -1,0 +1,171 @@
+
+
+\documentclass{article}
+
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage[comma,authoryear]{natbib}
+\usepackage{theorem}
+\usepackage[onehalfspacing]{setspace}
+\usepackage{indentfirst}
+\usepackage{float}
+\usepackage{geometry}
+\usepackage{enumerate}
+\usepackage{textcomp}
+
+
+\usepackage{tikz}
+\usetikzlibrary{intersections,calc}
+
+\usepackage{mathabx}
+
+\usepackage{url}
+
+\setcounter{MaxMatrixCols}{10}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{acknowledgement}{Acknowledgement}
+\newtheorem{algorithm}{Algorithm}
+\newtheorem{axiom}{Assumption}
+\newtheorem{case}{Case}
+\newtheorem{claim}{Claim}
+\newtheorem{conclusion}{Conclusion}
+\newtheorem{condition}{Condition}
+\newtheorem{conjecture}{Conjecture}
+\newtheorem{corollary}{Corollary}
+\newtheorem{criterion}{Criterion}
+{\theorembodyfont{\rmfamily}
+\newtheorem{definition}{Definition}
+}
+\newtheorem{example}{Example}
+\newtheorem{exercise}{Exercise}
+\newtheorem{lemma}{Lemma}
+\newtheorem{notation}{Notation}
+\newtheorem{problem}{Problem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{remark}{Remark}
+\newtheorem{solution}{Solution}
+\newtheorem{summary}{Summary}
+\newenvironment{proof}[1][Proof]{\noindent\textbf{#1.} }{\ \rule{0.5em}{0.5em}}
+\geometry{left=1in,right=1in,top=1in,bottom=1in} 
+
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\X}{\mathbb{X}}
+\newcommand{\1}{\mathbf{1}}
+
+\newcommand{\suchthat}{\;\ifnum\currentgrouptype=16 \middle\fi|\;}
+
+\newcommand\invisiblesection[1]{%
+  \refstepcounter{section}%
+  \addcontentsline{toc}{section}{\protect\numberline{\thesection}#1}%
+  \sectionmark{#1}}
+
+\def\citeapos#1{\citeauthor{#1}'s (\citeyear{#1})}
+
+\begin{document}
+
+\title{Econ 210C Homework 4}
+\author{Instructor: Johannes Wieland}
+\date{\color{red} Due: 06/06/2022, 11:59PM PST. Submit pdf write-up and zipped code packet on Canvas. Note: all code files must execute from a single program (e.g., main.m or main.do).}
+\maketitle
+
+
+%\section*{1. Sticky-Information Model}
+%Gali, Exercise 3.6
+
+\section*{1. Cost-push shocks}
+Consider the standard new Keynesian model 
+\begin{align}
+	\hat{y}_{t}&=E_{t}\hat{y}_{t+1} - E_{t}(\hat{i}_{t}-\hat{\pi}_{t+1}) \label{nk1} \\
+	\hat{\pi}_{t}&=\beta E_{t}\hat{\pi}_{t+1} +\kappa (\hat{y}_{t}-\hat{y}_{t}^{eff}) + u_t \label{nk2} \\
+	\hat{i}_{t}&=\phi_\pi \hat{\pi}_t,\qquad \phi_\pi>1 \label{nk3}
+\end{align}
+\begin{enumerate}[(a)]
+\item Interpret each of the equations \eqref{nk1}-\eqref{nk3} (max 2 sentence each).
+	\begin{itemize}
+		\item Euler equation in terms of output gap: today's output gap is high relative to tomorrow if the real rate exceeds the natural rate of interest. A high real rate leads to a lower output gap because it gives households a greater incentive to save rather than consume.
+		\item NKPC: inflation is determined by expected future marginal cost, which are proportional to the output gap. Higher marginal cost lead to a gradual increase in prices since prices are sticky, and thus to inflation.
+		\item Interest rate rule: monetary policy responds to inflation.
+	\end{itemize}	
+\item Assume $\hat{a}_{t}=0$ and $u_{t}=\rho_u u_{t-1}+\epsilon_t^u$ with $\epsilon_t^u\sim N(0,\sigma^2_{\epsilon^u})$. Solve for the equilibrium levels of $\hat{y}_t$, $\hat{y}_t-\hat{y}_t^{eff}$, $\hat{\pi}_t$, $\hat{i}_t$, and $\hat{r}_{t}=\hat{i}_t-E_t\hat{\pi}_{t+1}$ as a function of $u_t$.
+\begin{itemize}
+	\item We know inflation, output, and the nominal interest rate are linear functions of $u_t$.
+\begin{align*}
+	\psi_{xu} &= \rho_u \psi_{xu} - (\phi_\pi-\rho_u)\psi_{\pi u}\\
+	\psi_{\pi u} &= \beta\rho_u \psi_{\pi u} + \kappa \psi_{x u} + 1
+\end{align*}
+The first equation implies
+\begin{align*}
+	\psi_{xu} &= -\frac{\phi_\pi-\rho_u}{1-\rho}\psi_{\pi u}
+	\end{align*}
+	Combining the two equations yields,
+	\begin{align*}
+	\psi_{\pi u} &= \beta\rho_u \psi_{\pi u} - \kappa \frac{\phi_\pi-\rho_u}{1-\rho}\psi_{\pi u} + 1 \\
+	\psi_{\pi u} &=\frac{1-\rho_u}{(1-\beta\rho_u)(1-\rho_u) +\kappa(\phi_\pi-\rho_u)}
+\end{align*}
+So the solutions are
+\begin{align*}
+	\hat{y}_{t}-\hat{y}_{t}^{eff}&= \frac{-(\phi_\pi-\rho_u)}{(1-\beta\rho_u)(1-\rho_u) +\kappa(\phi_\pi-\rho_u)}u_t \\
+	\hat{\pi}_t&= \frac{1-\rho_u}{(1-\beta\rho_u)(1-\rho_u) +\kappa(\phi_\pi-\rho_u)}u_t \\
+	\hat{i}_t&= \frac{\phi_\pi(1-\rho_u)}{(1-\beta\rho_u)(1-\rho_u) +\kappa(\phi_\pi-\rho_u)}u_t \\
+	\hat{r}_{t}&= \frac{(\phi_\pi-\rho_u)(1-\rho_u)}{(1-\beta\rho_u)(1-\rho_u) +\kappa(\phi_\pi-\rho_u)}u_t
+\end{align*}
+\end{itemize}
+\item Explain intuitively how a supply shock affects the output gap, inflation, the nominal interest rate, and the real interest rate. (4 sentences should suffice.)
+\begin{itemize}
+	\item The supply shock increases inflation all else equal. 
+	
+	The central bank raises the nominal rate more than one-for-one in response (Taylor principle), so that the real rate increases. 
+	
+	A higher real rate reduces the output gap as households intertemporally substitute away from consuming today.
+	
+	However future consumption is fixed by the steady state, so intertemporal subsitution will cause only a drop in consumption today.
+
+	Since prices are sticky lower consumption demand translates into lower output.
+\end{itemize}
+\item Use your solution to express the loss function $L=\vartheta var(\hat{y}_{t}-\hat{y}_{t}^{eff})+var(\hat{\pi}_t)$ as a function of the model parameters, where $var(\hat{y}_{t}-\hat{y}_{t}^{eff})$ is the variance of the output gap and $var(\hat{\pi}_t)$ is the variance of inflation.
+\begin{itemize}
+	\item \begin{align*}
+	L &= \vartheta \left(\frac{\phi_\pi-\rho_u}{(1-\beta\rho_u)(1-\rho_u) +\kappa(\phi_\pi-\rho_u)}\right)^2 \sigma_u^2 + \left(\frac{1-\rho_u}{(1-\beta\rho_u)(1-\rho_u) +\kappa(\phi_\pi-\rho_u)}\right)^2 \sigma_u^2 \\
+	&= \frac{\vartheta(\phi_\pi-\rho_u)^2 + (1-\rho_u)^2}{[(1-\beta\rho_u)(1-\rho_u) +\kappa(\phi_\pi-\rho_u)]^2} \sigma_u^2
+\end{align*}
+\end{itemize}
+\item Show that the optimal interest rate rule satisfies $\phi_\pi=\rho_u + \frac{\kappa (1-\rho_u)}{\vartheta(1-\beta\rho_u)}$.
+\begin{itemize}
+	\item The FOC for minimizing the loss is
+	\begin{align*}
+	\frac{\partial L}{\partial \phi_\pi} &= \frac{2\vartheta(\phi_\pi-\rho_u) }{[(1-\beta\rho_u)(1-\rho_u) +\kappa(\phi_\pi-\rho_u)]^2} \sigma_u^2 - 2\kappa\frac{\vartheta(\phi_\pi-\rho_u)^2 + (1-\rho_u)^2}{[(1-\beta\rho_u)(1-\rho_u) +\kappa(\phi_\pi-\rho_u)]^3} \sigma_u^2 = 0 \\
+	0&= \vartheta(\phi_\pi-\rho_u)[(1-\beta\rho_u)(1-\rho_u) +\kappa(\phi_\pi-\rho_u)]  - \kappa[\vartheta(\phi_\pi-\rho_u)^2 + (1-\rho_u)^2] \\
+	0&= \vartheta(\phi_\pi-\rho_u)(1-\beta\rho_u)(1-\rho_u)   - \kappa (1-\rho_u)^2 \\
+	0&= \vartheta(\phi_\pi-\rho_u)(1-\beta\rho_u)   - \kappa (1-\rho_u) \\
+	\phi_\pi&=\rho_u + \frac{\kappa (1-\rho_u)}{\vartheta(1-\beta\rho_u)}
+\end{align*}
+\end{itemize}
+\item Using the optimal $\phi_\pi$, show that $\hat{y}_{t}-\hat{y}_{t}^{eff}=-\frac{\kappa}{\vartheta(1-\beta\rho_u)}\hat{\pi}_t$.
+\begin{itemize}
+	\item 
+	\begin{align*}
+	\hat{y}_{t}-\hat{y}_{t}^{eff}&= \frac{\phi_\pi-\rho_u}{(1-\beta\rho_u)(1-\rho_u) +\kappa(\phi_\pi-\rho_u)}u_t \\
+	&=-\frac{\kappa }{\vartheta(1-\beta\rho_u)}\frac{(1-\rho_u)}{(1-\beta\rho_u)(1-\rho_u) +\kappa(\phi_\pi-\rho_u)}u_t \\
+	&=-\frac{\kappa }{\vartheta(1-\beta\rho_u)}\hat{\pi}_t
+\end{align*}
+\end{itemize}
+\item The optimal monetary policy under discretion is $\hat{y}_{t}-\hat{y}_{t}^{eff}=-\frac{\kappa}{\vartheta}\hat{\pi}_t$. Does the optimal $\phi_\pi$ deliver a better, a worse, or the same loss? Explain intuitively. (No derivation should be necessary.)
+\begin{itemize}
+	\item The discretionary solution is feasible with $\phi_\pi=\rho_u + \frac{\kappa (1-\rho_u)}{\vartheta}$. That it is not picked suggests that it is not optimal. Intuitively, by credibly sticking to its interest rate rule, the central bank has some ability to commit, which allows it to achieve a superior outcome than discretion. 
+\end{itemize}
+%\item Does the optimal $\phi_\pi$ deliver a better, a worse, or the same loss than optimal monetary policy under commitment ($\hat{x}_t-\hat{x}_{t-1}=\frac{\kappa}{\vartheta}\hat{\pi}_t$)? Explain intuitively. (No derivation should be necessary.)
+\end{enumerate}
+
+
+
+
+
+
+
+
+\end{document}
