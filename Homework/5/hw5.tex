@@ -122,11 +122,11 @@ Implement the linearized new Keynesian model in a Jupyter notebook.
 Parameters: $\sigma=1,\kappa=0.03,\beta=0.99, \rho_i = 0.8,\rho_u=0.8$, and use the interest rate rule parameters you estimated in the previous question. Set the standard deviation of the monetary shock to 0.1 and that of the cost-push shock to 0.01.
 \begin{enumerate}[(a)]
 	\item Plot the IRFs. 
-	\item Intuitively explain how the shocks $\epsilon^r_t$ and $\epsilon^i_t$ affect $\hat{y}_t,\tilde{\pi}_t,\hat{i}_t$.
+	\item Intuitively explain how the shocks $\epsilon^u_t$ and $\epsilon^i_t$ affect $\hat{y}_t,\tilde{\pi}_t,\hat{i}_t$.
 	\item Simulate a time series of length 1000 and plot it.
 	\item Estimate the interest rate rule on your simulated data.
 	\item Explain why this procedure does not recovery the true parameters.
-	\item Would you be able to identify the true parameters using a Cholesky decomposition? Explain why or why not.
+%	\item Would you be able to identify the true parameters using a Cholesky decomposition? Explain why or why not.
 	\item What data do you need to identify the parameters of the interest rate rule?
 	\item Implement your proposed approach and show that it correctly recovers $\phi_\pi$ in the model.
 	\item Suppose the true interest rate rule was $\hat{i}_t= \phi_\pi\hat{\pi}_t + \phi_y\hat{y}_t + \epsilon^i_t$. Would you be able to identify both $\phi_\pi$ and $\phi_y$ using your procedure? Explain.
